@@ -1,7 +1,3 @@
-
-import { Foo } from '../views/Foo'
-import { Bar } from '../views/Bar'
-import { RouteRecordRaw } from 'vue-router'
 import { Welcome } from '../views/Welcome'
 import { One } from '../components/welcome/One'
 import { Two } from '../components/welcome/Two'
@@ -10,12 +6,12 @@ import { Four } from '../components/welcome/Four'
 
 
 export const routes = [
-  { path: '/', component: Foo },
-  { path: '/about', component: Bar },
-    
-  { path: '/welcome', 
+  { path: '/', redirect:'/welcome'},
+
+  { path: '/welcome',
     component:Welcome,
     children:[
+        {path: '',redirect:'/welcome/1'},
         {path:'1',component:One,},
         {path:'2',component:Two,},
         {path:'3',component:Three,},
