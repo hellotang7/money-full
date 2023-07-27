@@ -3,10 +3,10 @@ import { Foo } from '../views/Foo'
 import { Bar } from '../views/Bar'
 import { RouteRecordRaw } from 'vue-router'
 import { Welcome } from '../views/Welcome'
-import { One } from '../components/welcome/one'
-import { Two } from '../components/welcome/two'
-import { Three } from '../components/welcome/three'
-import { Four } from '../components/welcome/four'
+import { One } from '../components/welcome/One'
+import { Two } from '../components/welcome/Two'
+import { Three } from '../components/welcome/Three'
+import { Four } from '../components/welcome/Four'
 
 
 export const routes = [
