@@ -3,6 +3,10 @@ import { One } from '../components/welcome/One'
 import { Two } from '../components/welcome/Two'
 import { Three } from '../components/welcome/Three'
 import { Four } from '../components/welcome/Four'
+import {FourActions} from '../components/welcome/FourActions';
+import {OneActions} from '../components/welcome/OneActions';
+import {ThreeActions} from '../components/welcome/ThreeActions';
+import {TwoActions} from '../components/welcome/TwoActions';
 
 
 export const routes = [
@@ -12,10 +16,10 @@ export const routes = [
     component:Welcome,
     children:[
         {path: '',redirect:'/welcome/1'},
-        {path:'1',component:One,},
-        {path:'2',component:Two,},
-        {path:'3',component:Three,},
-        {path:'4',component:Four,},
+        { path: '1', components: { main: One, footer: OneActions }, },
+        { path: '2', components: { main: Two, footer: TwoActions }, },
+        { path: '3', components: { main: Three, footer: ThreeActions }, },
+        { path: '4', components: { main: Four, footer: FourActions }, },
       ]
   },
 
