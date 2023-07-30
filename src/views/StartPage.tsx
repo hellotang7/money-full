@@ -12,7 +12,6 @@ export const StartPage = defineComponent({
     const overlayVisble = ref(false);
     const onClickMenu = () => {
       overlayVisble.value = !overlayVisble.value;
-      console.log(overlayVisble.value);
     };
     return () => (
       <div>
@@ -25,7 +24,7 @@ export const StartPage = defineComponent({
           }}
         </Navbar>
         <Center class={s.pig_wrapper}>
-          <Icon name="pig" />
+          <Icon name="pig" class={s.pig} />
         </Center>
 
         <div class={s.button_wrapper}>
