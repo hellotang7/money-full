@@ -6,16 +6,19 @@
     }
 }
 
-.pig {
+svg.pig {
     width: 128px;
     height: 128px;
-    &_wrapper{
-        padding: 120px 0;
-    }
+    
 }
-.navIcon{
-height: 30px;
-height: 30px;
+
+.pig_wrapper {
+    padding: 120px 0;
+}
+
+svg.navIcon{
+width: 34px;
+height: 34px;
 position: relative;
 top: 2px;
 }

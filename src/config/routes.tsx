@@ -8,6 +8,9 @@ import { OneActions } from "../components/welcome/OneActions";
 import { ThreeActions } from "../components/welcome/ThreeActions";
 import { TwoActions } from "../components/welcome/TwoActions";
 import { StartPage } from "../views/StartPage";
+import { ItemPage } from "../views/ItemPage";
+import { ItemList } from "../components/item/ItemList";
+import { ItemCreate } from "../components/item/ItemCreate";
 
 export const routes = [
   { path: "/", redirect: "/welcome" },
@@ -40,4 +43,12 @@ export const routes = [
     ],
   },
   { path: "/start", component: StartPage },
+  {
+    path: "/items",
+    component: ItemPage,
+    children: [
+      { path: "list", component: ItemList },
+      { path: "create", component: ItemCreate },
+    ],
+  },
 ];
