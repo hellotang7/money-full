@@ -7,10 +7,12 @@ import {FourActions} from '../components/welcome/FourActions';
 import {OneActions} from '../components/welcome/OneActions';
 import {ThreeActions} from '../components/welcome/ThreeActions';
 import {TwoActions} from '../components/welcome/TwoActions';
+import { StartPage } from '../views/StartPage';
 
 
 export const routes = [
     {path: '/', redirect: '/welcome'},
+    { path: '/start', component: StartPage },
 
     {
         path: '/welcome',
@@ -23,6 +25,7 @@ export const routes = [
             {path: '4', name: 'Welcome4', components: {main: Four, footer: FourActions},},
         ]
     },
+    
 
 ];
 

@@ -21,8 +21,8 @@ export const Welcome = defineComponent({
 
 
         const replace = throttle(()=>{
-            const name = (route.name || 'Welcome').toString()
-            router.push(pushMap[name])
+            const name = (route.name || 'Welcome1').toString()
+            router.replace(pushMap[name])
         },500)
 
         watchEffect(() => {
