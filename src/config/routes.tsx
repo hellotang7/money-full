@@ -47,7 +47,7 @@ export const routes = [
     path: "/items",
     component: ItemPage,
     children: [
-      { path: "list", component: ItemList },
+      { path: "", component: ItemList },
       { path: "create", component: ItemCreate },
     ],
   },

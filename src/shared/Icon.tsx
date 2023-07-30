@@ -12,6 +12,7 @@ export type IconName =
   | "export"
   | "fen"
   | "notify"
+  | "left"
   | "pig";
 
 export const Icon = defineComponent({
