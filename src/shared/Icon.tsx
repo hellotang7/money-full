@@ -7,6 +7,7 @@ export type IconName =
   | "clock"
   | "cloud"
   | "mangosteen"
+  | "menu"
   | "pig";
 
 export const Icon = defineComponent({
