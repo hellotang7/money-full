@@ -1,11 +1,10 @@
 import { defineComponent } from "vue";
 import { Button } from "../shared/Button";
 import s from "./StartPage.module.scss";
+import { FloartButton } from "../shared/FloartButton";
 
 export const StartPage = defineComponent({
   setup: (props, context) => {
-    console.log(Button);
-
     const onClick = () => {
       console.log("hi");
     };
@@ -16,6 +15,7 @@ export const StartPage = defineComponent({
             测试
           </Button>
         </div>
+        <FloartButton></FloartButton>
       </div>
     );
   },
