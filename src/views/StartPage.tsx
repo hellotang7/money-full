@@ -15,7 +15,7 @@ export const StartPage = defineComponent({
             测试
           </Button>
         </div>
-        <FloartButton></FloartButton>
+        <FloartButton iconName="add"></FloartButton>
       </div>
     );
   },
