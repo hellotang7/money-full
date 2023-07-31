@@ -2,16 +2,19 @@
     &_nav {
         display: flex;
         justify-content: space-between;
-            text-align: center;
-            color: var(--navbar-text);
+        text-align: center;
+        color: var(--navbar-text);
+
         >li {
             flex-grow: 1;
             flex-shrink: 0;
             padding: 12px 0;
             background: var(--navbar-bg-end);
+
             &.selected {
                 position: relative;
-                &::after{
+
+                &::after {
                     content: "";
                     position: absolute;
                     display: block;
@@ -20,6 +23,7 @@
                     height: 4px;
                     width: 100%;
                     background: var(--tabs-indicator-bg);
+                    // transition: all 250ms;
                 }
             }
         }

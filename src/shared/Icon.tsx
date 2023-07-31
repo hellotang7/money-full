@@ -13,6 +13,8 @@ export type IconName =
   | "fen"
   | "notify"
   | "left"
+  | "notes"
+  | "data"
   | "pig";
 
 export const Icon = defineComponent({
