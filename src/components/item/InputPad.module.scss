@@ -1,16 +1,32 @@
 .wrapper {
-    .s {
-        border: 1px solid var(--button-border-color);
-        border-bottom: none;
-        height: 32px;
+    .dateAndAmount {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 8px;
+        border-top: 1px solid var(--button-border-color);
+        // height: 32px;
 
-        .notes {
+        padding: 16px;
+
+        .date {
+            font-size: 12px;
             display: flex;
             align-items: center;
+            color: var(--date-text);
+            svg.icon{
+                width: 24px;
+                height: 24px;
+            }
+
+            >span {
+                margin-left: 8px;
+            }
+        }
+
+        .amount {
+            font-size: 20px;
+            font-family: monospace;
+            color: var(--amount-color);
         }
     }
 

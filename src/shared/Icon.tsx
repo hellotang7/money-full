@@ -14,7 +14,7 @@ export type IconName =
   | "notify"
   | "left"
   | "notes"
-  | "data"
+  | "date"
   | "pig";
 
 export const Icon = defineComponent({
