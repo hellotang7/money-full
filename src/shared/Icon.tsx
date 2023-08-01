@@ -15,6 +15,7 @@ export type IconName =
   | "left"
   | "notes"
   | "date"
+  | "bk"
   | "pig";
 
 export const Icon = defineComponent({

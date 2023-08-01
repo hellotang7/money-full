@@ -35,7 +35,6 @@ export const InputPad = defineComponent({
           appendText(3);
         },
       },
-      { text: "删", onClick: () => {} },
       {
         text: "4",
         onClick: () => {
@@ -54,7 +53,6 @@ export const InputPad = defineComponent({
           appendText(6);
         },
       },
-      { text: "+", onClick: () => {} },
       {
         text: "7",
         onClick: () => {
@@ -73,7 +71,6 @@ export const InputPad = defineComponent({
           appendText(9);
         },
       },
-      { text: "-", onClick: () => {} },
       { text: ".", onClick: () => {} },
       {
         text: "0",
@@ -82,7 +79,7 @@ export const InputPad = defineComponent({
         },
       },
       {
-        text: "清空",
+        text: <Icon name="bk" />,
         onClick: () => {
           refAmount.value = "";
         },
