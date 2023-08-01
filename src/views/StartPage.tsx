@@ -15,6 +15,7 @@ export const StartPage = defineComponent({
       overlayVisble.value = !overlayVisble.value;
     };
     return () => (
+
       <MainLayout>
         {{
           title: () => "山竹记账",
@@ -26,6 +27,7 @@ export const StartPage = defineComponent({
               <Center class={s.pig_wrapper}>
                 <Icon name="pig" class={s.pig} />
               </Center>
+
 
               <div class={s.button_wrapper}>
                 <RouterLink to="/items/create">
