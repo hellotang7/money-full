@@ -1,6 +1,7 @@
 import { defineComponent, PropType } from "vue";
 import s from "./InputPad.module.scss";
 import { Icon } from "../../shared/Icon";
+
 export const InputPad = defineComponent({
   props: {
     name: {
@@ -28,6 +29,8 @@ export const InputPad = defineComponent({
     ];
     return () => (
       <div class={s.wrapper}>
+        <van-button type="primary">主要按钮</van-button>
+
         <div class={s.dateAndAmount}>
           <span class={s.date}>
             <Icon name="date" class={s.icon} />
@@ -35,7 +38,6 @@ export const InputPad = defineComponent({
           </span>
           <span class={s.amount}>￥199.122</span>
         </div>
-
         <div class={s.buttons}>
           {buttons.map((button) => (
             <button onClick={button.onClick}>{button.text}</button>
