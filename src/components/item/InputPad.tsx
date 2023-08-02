@@ -12,9 +12,26 @@ export const InputPad = defineComponent({
   },
   setup: (props, context) => {
     const refDate = ref<Date>();
-    const refAmount = ref("");
-    const appendText = (n: number | string) =>
-      (refAmount.value += n.toString());
+    const refAmount = ref("0"); //现有的值
+    const appendText = (n: number | string) => {
+      const nString = n.toString(); //正在输入的值
+      if (refAmount.value.length === 13) return; //最多13位
+
+      if (refAmount.value.indexOf(".") >= 0 && nString === ".") return;
+
+      if (refAmount.value.length - refAmount.value.indexOf(".") > 2) return;
+
+      if (refAmount.value === "0") {
+        if ("0123456789".indexOf(nString) >= 0) {
+          refAmount.value = nString;
+        } else {
+          refAmount.value += nString;
+        }
+        return;
+      }
+
+      refAmount.value += nString;
+    };
 
     const buttons = [
       {
@@ -71,7 +88,12 @@ export const InputPad = defineComponent({
           appendText(9);
         },
       },
-      { text: ".", onClick: () => {} },
+      {
+        text: ".",
+        onClick: () => {
+          appendText(".");
+        },
+      },
       {
         text: "0",
         onClick: () => {
@@ -81,7 +103,7 @@ export const InputPad = defineComponent({
       {
         text: <Icon name="bk" />,
         onClick: () => {
-          refAmount.value = "";
+          refAmount.value = "0";
         },
       },
       { text: "提交", onClick: () => {} },
