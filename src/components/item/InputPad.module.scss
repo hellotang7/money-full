@@ -4,9 +4,8 @@
         justify-content: space-between;
         align-items: center;
         border-top: 1px solid var(--button-border-color);
-        // height: 32px;
-
         padding: 16px;
+        background: var(--buttons-bg);
 
         .date {
             font-size: 12px;
