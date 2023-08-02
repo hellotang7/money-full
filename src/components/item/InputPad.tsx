@@ -15,11 +15,12 @@ export const InputPad = defineComponent({
     const refAmount = ref("0"); //现有的值
     const appendText = (n: number | string) => {
       const nString = n.toString(); //正在输入的值
+      const dotIndex = refAmount.value.indexOf(".");
       if (refAmount.value.length === 13) return; //最多13位
 
       if (refAmount.value.indexOf(".") >= 0 && nString === ".") return;
 
-      if (refAmount.value.length - refAmount.value.indexOf(".") > 2) return;
+      if (dotIndex >= 0 && refAmount.value.length - dotIndex > 2) return;
 
       if (refAmount.value === "0") {
         if ("0123456789".indexOf(nString) >= 0) {
