@@ -1,10 +1,10 @@
-import { defineComponent, PropType, ref } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import s from "./EmojiSelect.module.scss";
 import { emojiList } from "./emojiList";
 export const EmojiSelect = defineComponent({
   props: {
-    name: {
-      type: String as PropType<string>,
+    modelValue: {
+      type: String,
     },
   },
   setup: (props, context) => {
@@ -79,25 +79,49 @@ export const EmojiSelect = defineComponent({
       ],
       ["运动", ["sport", "game"]],
     ];
-    // console.log(emojiList);
-    const refSelected = ref(1);
-    const selectedItem = table[refSelected.value][1];
+    const refSelected = ref(0);
 
-    const emojis = selectedItem.map((category) =>
-      emojiList
-        .find((item) => item[0] === category)?.[1]
-        .map((item) => <li>{item}</li>)
-    );
-    console.log(emojis);
+    const onClickTab = (index: number) => {
+      refSelected.value = index;
+    };
+
+    const slelectedEmoji = ref("");
+
+    const onClickEmoji = (emoji: string) => {
+      slelectedEmoji.value = emoji;
+
+      context.emit("update:modelValue", emoji);
+    };
+
+    const emojis = computed(() => {
+      const selectedItem = table[refSelected.value][1];
+      return selectedItem.map((category) =>
+        emojiList
+          .find((item) => item[0] === category)?.[1]
+          .map((item) => (
+            <li
+              class={item === slelectedEmoji.value && s.active}
+              onClick={() => onClickEmoji(item)}
+            >
+              {item}
+            </li>
+          ))
+      );
+    });
 
     return () => (
       <div class={s.emojiList}>
         <nav>
-          {table.map((item) => (
-            <span>{item[0]}</span>
+          {table.map((item, index) => (
+            <span
+              class={index === refSelected.value && s.selected}
+              onClick={() => onClickTab(index)}
+            >
+              {item[0]}
+            </span>
           ))}
         </nav>
-        <ol>{emojis}</ol>
+        <ol>{emojis.value}</ol>
       </div>
     );
   },
