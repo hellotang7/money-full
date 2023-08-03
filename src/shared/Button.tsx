@@ -1,11 +1,21 @@
-import { defineComponent } from "vue";
+import { PropType, defineComponent } from "vue";
 import s from "./Button.module.scss";
 
-interface Props {
-  onClick?: (e: MouseEvent) => void;
-}
-export const Button = defineComponent<Props>({
+export const Button = defineComponent({
+  props: {
+    onclick: {
+      type: Function as PropType<(e: MouseEvent) => void>,
+    },
+    level: {
+      type: String as PropType<"important" | "normal" | "danger">,
+      default: "normal",
+    },
+  },
   setup: (props, context) => {
-    return () => <button class={s.button}>{context.slots.default?.()}</button>;
+    return () => (
+      <button class={[s.button, s[props.level]]}>
+        {context.slots.default?.()}
+      </button>
+    );
   },
 });
