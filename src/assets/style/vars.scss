@@ -12,7 +12,7 @@
     --button-bg: #5C33BE;
     --button-bg-danger: linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36));
     --button-text: white;
-    --button-font-size: 18px;
+    --button-font-size: 16px;
     --button-radius: 8px;
     --button-height: 48px;
     --float-button-text: white;
@@ -58,4 +58,8 @@
     --bg: white;
 
     --z-index-navbar:32;
+
+    --van-overlay-z-index: 64 !important;
+
+    --app-name-color:#7878FF
 }

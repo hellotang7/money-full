@@ -10,6 +10,10 @@
     display: block;
 }
 
+ .validationCodeButton {
+     margin-left: 16px;
+ }
+
 .formItem {
     min-height: var(--input-min-height);
     max-width: 100%;
@@ -22,7 +26,7 @@
         flex-grow: 1;
         border: 1px solid var(--input-border-color);
         border-radius: var(--input-radius);
-        font-size: 18px;
+        font-size: 16px;
         font-family: inherit;
         padding-left: 16px;
         padding-right: 16px;
@@ -32,6 +36,12 @@
             border-color: var(--error-color);
         }
     }
+
+    &.validationCodeInput {
+        flex-grow: 0;
+        width: 9em;
+    }
+   
 
     &_name {}
 

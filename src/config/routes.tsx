@@ -14,6 +14,7 @@ import { ItemCreate } from "../components/item/ItemCreate";
 import { TagPage } from "../components/tags/TagPage";
 import { TagCreate } from "../components/tags/TagCreate";
 import { TagEdit } from "../components/tags/TagEdit";
+import { SignInPage } from "../views/SignInPage";
 
 export const routes = [
   { path: "/", redirect: "/welcome" },
@@ -62,4 +63,5 @@ export const routes = [
       { path: ":id/deit", component: TagEdit },
     ],
   },
+  { path: "/sign_in", component: SignInPage },
 ];
