@@ -59,7 +59,7 @@ export const routes = [
     component: TagPage,
     children: [
       { path: "create", component: TagCreate },
-      { path: ":id", component: TagEdit },
+      { path: ":id/deit", component: TagEdit },
     ],
   },
 ];
