@@ -26,11 +26,6 @@ export const ItemList = defineComponent({
 
     const refSelected = ref("本月");
 
-    watchEffect(() => {
-      if (refSelected.value === "自定义时间") {
-        refOverlayVisible.value = true;
-      }
-    });
     const refOverlayVisible = ref(false);
     const onsubmitCustomTime = (e: Event) => {
       e.preventDefault();
@@ -43,7 +38,10 @@ export const ItemList = defineComponent({
           icon: () => <Icon name="menu" />,
           default: () => (
             <>
-              <Tabs v-model:selected={refSelected.value}>
+              <Tabs
+                v-model:selected={refSelected.value}
+                onUpdate:selected={() => (refOverlayVisible.value = true)}
+              >
                 <Tab name="本月">
                   <ItemSummary
                     starDate={timeList[0].start.format()}
