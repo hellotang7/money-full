@@ -9,7 +9,7 @@
     --welcome-nav-gap: 8px;
     --transition-duration: 0.5s;
     --button-bg: #5C33BE;
-    --button-bg-danger:  linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36));;
+    --button-bg-danger: linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36));
     --button-text: white;
     --button-font-size: 18px;
     --button-radius: 8px;
@@ -40,4 +40,15 @@
     --emoji-nav-text-selected: #333;
     --main: #5c33be;
     --tag-bg: #EFEFEF;
+
+
+    --total-bg: #252A43;
+    --total-text: white;
+    --total-income: #FE7275;
+    --total-expenses: #53A867;
+
+    --list-tag-text: #333;
+    --list-amount-text: var(--amount-color);
+    --list-time-text: var(--date-text);
+    --main: #5c33be;
 }
