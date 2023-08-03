@@ -36,8 +36,8 @@ export const TagForm = defineComponent({
       Object.assign(errors, validate(formData, rules));
       console.log(errors);
 
-      formData.name = "";
-      formData.sign = "";
+      // formData.name = "";
+      // formData.sign = "";
       e.preventDefault();
     };
     return () => (
