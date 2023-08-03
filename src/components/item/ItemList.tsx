@@ -16,16 +16,26 @@ export const ItemList = defineComponent({
       end: new Time().format(),
     });
     const timeList = [
-      { start: time.firstDayOfMonth(), end: time.lastDayOfMonth() },
       {
-        start: time.add(-1, "month").firstDayOfMonth(),
-        end: time.add(-1, "month").lastDayOfMonth,
+        start: time.firstDayOfMonth().format(),
+        end: time.lastDayOfMonth().format(),
       },
-      { start: time.firstDayOfYear(), end: time.lastDayOfYear() },
+      {
+        start: time.add(-1, "month").firstDayOfMonth().format(),
+        end: time.add(-1, "month").lastDayOfMonth().format(),
+      },
+      {
+        start: time.firstDayOfYear().format(),
+        end: time.lastDayOfYear().format(),
+      },
     ];
 
     const refSelected = ref("本月");
-
+    watchEffect(() => {
+      if (refSelected.value === "自定义时间") {
+        refOverlayVisible.value = true;
+      }
+    });
     const refOverlayVisible = ref(false);
     const onsubmitCustomTime = (e: Event) => {
       e.preventDefault();
@@ -40,24 +50,24 @@ export const ItemList = defineComponent({
             <>
               <Tabs
                 v-model:selected={refSelected.value}
-                onUpdate:selected={() => (refOverlayVisible.value = true)}
+                // onUpdate:selected={() => (refOverlayVisible.value = true)}
               >
                 <Tab name="本月">
                   <ItemSummary
-                    starDate={timeList[0].start.format()}
-                    endDate={timeList[0].end.format()}
+                    starDate={timeList[0].start}
+                    endDate={timeList[0].end}
                   />
                 </Tab>
                 <Tab name="上月">
                   <ItemSummary
-                    starDate={timeList[1].start.format()}
-                    endDate={timeList[0].end.format()}
+                    starDate={timeList[1].start}
+                    endDate={timeList[0].end}
                   />
                 </Tab>
                 <Tab name="今年">
                   <ItemSummary
-                    starDate={timeList[2].start.format()}
-                    endDate={timeList[2].end.format()}
+                    starDate={timeList[2].start}
+                    endDate={timeList[2].end}
                   />
                 </Tab>
                 <Tab name="自定义时间">
