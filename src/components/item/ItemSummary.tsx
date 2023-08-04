@@ -3,7 +3,7 @@ import s from "./ItemSummary.module.scss";
 import { FloartButton } from "../../shared/FloartButton";
 export const ItemSummary = defineComponent({
   props: {
-    starDate: {
+    startDate: {
       type: String as PropType<string>,
       required: true,
     },
