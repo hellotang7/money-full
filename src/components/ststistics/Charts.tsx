@@ -1,5 +1,6 @@
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import s from "./Charts.module.scss";
+import { FormItem } from "../../shared/Form";
 export const Charts = defineComponent({
   props: {
     starDate: {
@@ -12,6 +13,20 @@ export const Charts = defineComponent({
     },
   },
   setup: (props, context) => {
-    return () => <div class={s.wrapper}>Charts</div>;
+    const category = ref("exoenses");
+
+    return () => (
+      <div class={s.wrapper}>
+        <FormItem
+          label="类型"
+          type="select"
+          v-model={category.value}
+          options={[
+            { value: "exoenses", text: "支出" },
+            { value: "income", text: "收入" },
+          ]}
+        />
+      </div>
+    );
   },
 });
