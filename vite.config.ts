@@ -8,7 +8,6 @@ import { svgstore } from "./src/vite_plugins/svgstore";
 export default defineConfig({
   plugins: [
     vue(),
-
     vueJsx({
       transformOn: true,
       mergeProps: true,
@@ -18,4 +17,11 @@ export default defineConfig({
       resolves: [VantResolve()],
     }),
   ],
+  server: {
+    proxy: {
+      "/api/v1": {
+        target: "http://121.196.236.94:3000/",
+      },
+    },
+  },
 });
