@@ -4,6 +4,8 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { Icon } from "../../shared/Icon";
 import { Tab, Tabs } from "../../shared/Tabs";
 import { InputPad } from "./InputPad";
+import { RouterLink } from "vue-router";
+
 export const ItemCreate = defineComponent({
   props: {
     name: {
@@ -80,7 +82,11 @@ export const ItemCreate = defineComponent({
       <MainLayout class={s.layout}>
         {{
           title: () => "记一笔",
-          icon: () => <Icon name="left" class={s.navIcon} />,
+          icon: () => (
+            <RouterLink to="/items">
+              <Icon name="left" class={s.navIcon} />
+            </RouterLink>
+          ),
           default: () => (
             <>
               <div class={s.wrapper}>

@@ -3,6 +3,7 @@ import s from "./InputPad.module.scss";
 import { Icon } from "../../shared/Icon";
 import { DatetimePicker, Popup } from "vant";
 import { Time } from "../../shared/time";
+import { RouterLink } from "vue-router";
 
 export const InputPad = defineComponent({
   props: {
