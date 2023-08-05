@@ -69,6 +69,7 @@ export const SignInPage = defineComponent({
                   error={errors.code?.[0]}
                   placeholder="请输入验证码"
                   onClick={onClickSendValidationCode}
+                  // countFrom={3}
                 />
                 <FormItem class={s.login}>
                   <Button>登录</Button>
