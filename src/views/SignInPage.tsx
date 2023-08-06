@@ -25,8 +25,6 @@ export const SignInPage = defineComponent({
     } = useBool(false);
 
     const onSubmit = async (e: Event) => {
-      console.log(111);
-
       e.preventDefault();
       Object.assign(errors, {
         email: [],
@@ -48,7 +46,9 @@ export const SignInPage = defineComponent({
       );
 
       if (!hasError(errors)) {
-        const response = await http.post("/session", formData);
+        const response = await http.post<{ jwt: string }>("/session", formData);
+        localStorage.setItem("jwt", response.data.jwt);
+        history.push("/");
       }
     };
 
