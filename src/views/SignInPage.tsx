@@ -6,6 +6,7 @@ import { Form, FormItem } from "../shared/Form";
 import { Button } from "../shared/Button";
 import { validate } from "../shared/validate";
 import { http } from "../shared/Http";
+import { useBool } from "../hooks/useBool";
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const formData = reactive({
@@ -16,6 +17,12 @@ export const SignInPage = defineComponent({
       email: [],
       code: [],
     });
+    const {
+      ref: refDisabled,
+      toggle,
+      on: disabled,
+      off: enable,
+    } = useBool(false);
     const onsubmit = (e: Event) => {
       e.preventDefault();
       Object.assign(errors, {
@@ -44,15 +51,13 @@ export const SignInPage = defineComponent({
       throw error;
     };
     const onClickSendValidationCode = async () => {
+      disabled();
       const response = await http
-        .post("/validation_codes", {
-          email: formData.email,
-        })
-        .catch(onError);
+        .post("/validation_codes", { email: formData.email })
+        .catch(onError)
+        .finally(enable);
       //成功
       refValidationCode.value.startCount();
-
-      console.log(response);
     };
     return () => (
       <MainLayout>
@@ -82,6 +87,7 @@ export const SignInPage = defineComponent({
                   placeholder="请输入验证码"
                   onClick={onClickSendValidationCode}
                   countFrom={1}
+                  disabled={refDisabled.value}
                   ref={refValidationCode}
                 />
                 <FormItem class={s.login}>

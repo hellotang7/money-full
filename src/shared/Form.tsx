@@ -43,6 +43,7 @@ export const FormItem = defineComponent({
       type: Number,
       default: 60,
     },
+    disabled: Boolean,
   },
   emits: ["update:modelValue"],
   setup: (props, context) => {
@@ -84,8 +85,8 @@ export const FormItem = defineComponent({
               />
               <Button
                 class={s.validationCodeButton}
-                onclick={props.onClick}
-                disabled={isCounting.value}
+                onClick={props.onClick}
+                disabled={isCounting.value || props.disabled}
               >
                 {isCounting.value
                   ? `${count.value}秒后可重新发送`
