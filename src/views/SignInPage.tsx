@@ -5,7 +5,7 @@ import { Icon } from "../shared/Icon";
 import { Form, FormItem } from "../shared/Form";
 import { Button } from "../shared/Button";
 import { validate } from "../shared/validate";
-import axios from "axios";
+import { http } from "../shared/Http";
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const formData = reactive({
@@ -37,14 +37,18 @@ export const SignInPage = defineComponent({
       );
     };
     const refValidationCode = ref<any>();
+    const onError = (error: any) => {
+      if (error.response.status === 422) {
+        Object.assign(errors, error.response.data.errors);
+      }
+      throw error;
+    };
     const onClickSendValidationCode = async () => {
-      const response = axios
-        .post("/api/v1/validation_codess", {
+      const response = await http
+        .post("/validation_codes", {
           email: formData.email,
         })
-        .catch(() => {
-          //失败
-        });
+        .catch(onError);
       //成功
       refValidationCode.value.startCount();
 
@@ -67,8 +71,9 @@ export const SignInPage = defineComponent({
                   type="text"
                   v-model={formData.email}
                   error={errors.email?.[0]}
-                  placeholder="请输入邮箱地址"
+                  placeholder="请输入邮箱，然后点击发送验证码"
                 />
+
                 <FormItem
                   label="验证码"
                   type="validationCode"
@@ -76,7 +81,7 @@ export const SignInPage = defineComponent({
                   error={errors.code?.[0]}
                   placeholder="请输入验证码"
                   onClick={onClickSendValidationCode}
-                  countFrom={3}
+                  countFrom={1}
                   ref={refValidationCode}
                 />
                 <FormItem class={s.login}>
