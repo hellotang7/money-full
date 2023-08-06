@@ -3,7 +3,7 @@ import s from "./Button.module.scss";
 
 export const Button = defineComponent({
   props: {
-    onclick: {
+    onClick: {
       type: Function as PropType<(e: MouseEvent) => void>,
     },
     level: {

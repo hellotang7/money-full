@@ -4,7 +4,7 @@ import { MainLayout } from "../layouts/MainLayout";
 import { Icon } from "../shared/Icon";
 import { Form, FormItem } from "../shared/Form";
 import { Button } from "../shared/Button";
-import { validate } from "../shared/validate";
+import { hasError, validate } from "../shared/validate";
 import { http } from "../shared/Http";
 import { useBool } from "../hooks/useBool";
 export const SignInPage = defineComponent({
@@ -23,12 +23,16 @@ export const SignInPage = defineComponent({
       on: disabled,
       off: enable,
     } = useBool(false);
-    const onsubmit = (e: Event) => {
+
+    const onSubmit = async (e: Event) => {
+      console.log(111);
+
       e.preventDefault();
       Object.assign(errors, {
         email: [],
         code: [],
       });
+
       Object.assign(
         errors,
         validate(formData, [
@@ -42,7 +46,12 @@ export const SignInPage = defineComponent({
           { key: "code", type: "required", message: "必填" },
         ])
       );
+
+      if (!hasError(errors)) {
+        const response = await http.post("/session", formData);
+      }
     };
+
     const refValidationCode = ref<any>();
     const onError = (error: any) => {
       if (error.response.status === 422) {
@@ -70,12 +79,12 @@ export const SignInPage = defineComponent({
                 <Icon class={s.icon} name="mangosteen"></Icon>
                 <h1 class={s.title}>山竹记账</h1>
               </div>
-              <Form onSubmit={onsubmit}>
+              <Form onSubmit={onSubmit}>
                 <FormItem
                   label="邮箱地址"
                   type="text"
                   v-model={formData.email}
-                  error={errors.email?.[0]}
+                  error={errors.email?.[0] ?? "　"}
                   placeholder="请输入邮箱，然后点击发送验证码"
                 />
 
@@ -83,7 +92,7 @@ export const SignInPage = defineComponent({
                   label="验证码"
                   type="validationCode"
                   v-model={formData.code}
-                  error={errors.code?.[0]}
+                  error={errors.code?.[0] ?? "　"}
                   placeholder="请输入验证码"
                   onClick={onClickSendValidationCode}
                   countFrom={1}
@@ -91,7 +100,7 @@ export const SignInPage = defineComponent({
                   ref={refValidationCode}
                 />
                 <FormItem class={s.login}>
-                  <Button>登录</Button>
+                  <Button type="submit">登录</Button>
                 </FormItem>
               </Form>
             </div>
