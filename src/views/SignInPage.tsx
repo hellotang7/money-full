@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive } from "vue";
+import { defineComponent, PropType, reactive, ref } from "vue";
 import s from "./SignInPage.module.scss";
 import { MainLayout } from "../layouts/MainLayout";
 import { Icon } from "../shared/Icon";
@@ -22,7 +22,6 @@ export const SignInPage = defineComponent({
         email: [],
         code: [],
       });
-
       Object.assign(
         errors,
         validate(formData, [
@@ -37,10 +36,18 @@ export const SignInPage = defineComponent({
         ])
       );
     };
-    const onClickSendValidationCode = () => {
-      const response = axios.post("/api/v1/validation_codes", {
-        email: formData.email,
-      });
+    const refValidationCode = ref<any>();
+    const onClickSendValidationCode = async () => {
+      const response = axios
+        .post("/api/v1/validation_codess", {
+          email: formData.email,
+        })
+        .catch(() => {
+          //失败
+        });
+      //成功
+      refValidationCode.value.startCount();
+
       console.log(response);
     };
     return () => (
@@ -69,7 +76,8 @@ export const SignInPage = defineComponent({
                   error={errors.code?.[0]}
                   placeholder="请输入验证码"
                   onClick={onClickSendValidationCode}
-                  // countFrom={3}
+                  countFrom={3}
+                  ref={refValidationCode}
                 />
                 <FormItem class={s.login}>
                   <Button>登录</Button>
