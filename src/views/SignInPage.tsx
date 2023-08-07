@@ -7,14 +7,16 @@ import { Button } from "../shared/Button";
 import { hasError, validate } from "../shared/validate";
 import { http } from "../shared/Http";
 import { useBool } from "../hooks/useBool";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { refreshMe } from "../shared/me";
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const refValidationCode = ref<any>();
     const router = useRouter();
+    const route = useRoute();
     const formData = reactive({
       email: "2714148252@qq.com",
-      code: "",
+      code: "589326",
     });
     const errors = reactive({
       email: [],
@@ -55,10 +57,11 @@ export const SignInPage = defineComponent({
 
         localStorage.setItem(
           "jwt",
-          "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0NDIsImV4cCI6MTY5MTM4NzI1M30.s1p3e9GQiaRL5Yx76Vw5s4uCd-swY_DRsOI3L8NZNT0"
+          "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0NDIsImV4cCI6MTY5MTQwMTEwN30.LwcIkeEfzZN55Wpm4wBpm6fG8SNiNJj_KuD9SC6qHXM"
         );
 
-        const returnTo = localStorage.getItem("returnTo");
+        const returnTo = route.query.return_to?.toString();
+        refreshMe();
         router.push(returnTo || "/");
       }
     };
