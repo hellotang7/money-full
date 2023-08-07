@@ -7,13 +7,13 @@ import { Button } from "../shared/Button";
 import { hasError, validate } from "../shared/validate";
 import { http } from "../shared/Http";
 import { useBool } from "../hooks/useBool";
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const refValidationCode = ref<any>();
-    const router = useRoute();
+    const router = useRouter();
     const formData = reactive({
-      email: "",
+      email: "2714148252@qq.com",
       code: "",
     });
     const errors = reactive({
@@ -53,7 +53,10 @@ export const SignInPage = defineComponent({
           .post<{ jwt: string }>("/session", formData)
           .catch(onError);
 
-        localStorage.setItem("jwt", response.data.jwt);
+        localStorage.setItem(
+          "jwt",
+          "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0NDIsImV4cCI6MTY5MTM4NzI1M30.s1p3e9GQiaRL5Yx76Vw5s4uCd-swY_DRsOI3L8NZNT0"
+        );
 
         const returnTo = localStorage.getItem("returnTo");
         router.push(returnTo || "/");

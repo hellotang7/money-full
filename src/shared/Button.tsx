@@ -1,5 +1,6 @@
 import { PropType, computed, defineComponent, ref } from "vue";
 import s from "./Button.module.scss";
+import { RouteLocationRaw, RouterLink } from "vue-router";
 
 export const Button = defineComponent({
   props: {
@@ -51,6 +52,21 @@ export const Button = defineComponent({
       >
         {context.slots.default?.()}
       </button>
+    );
+  },
+});
+
+export const SkipFeatures = defineComponent({
+  setup: (props, context) => {
+    const onClick = () => {
+      localStorage.setItem("skipFeatures", "yes");
+    };
+    return () => (
+      <span onClick={onClick}>
+        <RouterLink class={s.fake} to={"/start"}>
+          跳过
+        </RouterLink>
+      </span>
     );
   },
 });

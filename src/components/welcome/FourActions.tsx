@@ -1,11 +1,17 @@
-import s from './welcome.module.scss';
-import { RouterLink } from 'vue-router';
+import { SkipFeatures } from "../../shared/Button";
+import s from "./welcome.module.scss";
+import { RouterLink } from "vue-router";
+const onClick = () => {
+  localStorage.setItem("skipFeatures", "yes");
+};
 export const FourActions = () => (
-    <div class={s.actions}>
-        <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
-        <RouterLink to="/start" >完成</RouterLink>
-        <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
-    </div>
-)
+  <div class={s.actions}>
+    <SkipFeatures class={s.fake} />
+    <span onClick={onClick}>
+      <RouterLink to="/start">完成</RouterLink>
+    </span>
+    <SkipFeatures class={s.fake} />
+  </div>
+);
 
-FourActions.displayName = 'FourActions'
+FourActions.displayName = "FourActions";
