@@ -51,14 +51,17 @@ export const SignInPage = defineComponent({
       );
 
       if (!hasError(errors)) {
+        // const response = await http
+        //   .post<{ jwt: string }>("/session", formData)
+        //   .catch(onError);
         const response = await http
-          .post<{ jwt: string }>("/session", formData)
+          .post<{ jwt: string }>("/session", formData, {
+            params: { _mock: "session" },
+          })
           .catch(onError);
+        console.log(response);
 
-        localStorage.setItem(
-          "jwt",
-          "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0NDIsImV4cCI6MTY5MTQwMTEwN30.LwcIkeEfzZN55Wpm4wBpm6fG8SNiNJj_KuD9SC6qHXM"
-        );
+        localStorage.setItem("jwt", "xxx");
 
         const returnTo = route.query.return_to?.toString();
         refreshMe();

@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@faker-js/faker':
+    specifier: 7.3.0
+    version: registry.npmmirror.com/@faker-js/faker@7.3.0
   axios:
     specifier: ^0.27.2
     version: registry.npmmirror.com/axios@0.27.2
@@ -1512,6 +1515,13 @@ packages:
     dependencies:
       '@babel/helper-validator-identifier': registry.npmmirror.com/@babel/helper-validator-identifier@7.16.7
       to-fast-properties: registry.npmmirror.com/to-fast-properties@2.0.0
+
+  registry.npmmirror.com/@faker-js/faker@7.3.0:
+    resolution: {integrity: sha512-1W0PZezq2rxlAssoWemi9gFRD8IQxvf0FPL5Km3TOmGHFG7ib0TbFBJ0yC7D/1NsxunjNTK6WjUXV8ao/mKZ5w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@faker-js/faker/-/faker-7.3.0.tgz}
+    name: '@faker-js/faker'
+    version: 7.3.0
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: false
 
   registry.npmmirror.com/@jridgewell/sourcemap-codec@1.4.11:
     resolution: {integrity: sha512-Fg32GrJo61m+VqYSdRSjRXMjQ06j8YIYfcTqndLYVAaHmroZHLJZCydsWBOTDqXS2v+mjxohBWEMfg97GXmYQg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.11.tgz}
