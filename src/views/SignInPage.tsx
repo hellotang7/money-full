@@ -7,8 +7,11 @@ import { Button } from "../shared/Button";
 import { hasError, validate } from "../shared/validate";
 import { http } from "../shared/Http";
 import { useBool } from "../hooks/useBool";
+import { useRoute } from "vue-router";
 export const SignInPage = defineComponent({
   setup: (props, context) => {
+    const refValidationCode = ref<any>();
+    const router = useRoute();
     const formData = reactive({
       email: "",
       code: "",
@@ -46,13 +49,17 @@ export const SignInPage = defineComponent({
       );
 
       if (!hasError(errors)) {
-        const response = await http.post<{ jwt: string }>("/session", formData);
+        const response = await http
+          .post<{ jwt: string }>("/session", formData)
+          .catch(onError);
+
         localStorage.setItem("jwt", response.data.jwt);
-        history.push("/");
+
+        const returnTo = localStorage.getItem("returnTo");
+        router.push(returnTo || "/");
       }
     };
 
-    const refValidationCode = ref<any>();
     const onError = (error: any) => {
       if (error.response.status === 422) {
         Object.assign(errors, error.response.data.errors);
@@ -95,7 +102,7 @@ export const SignInPage = defineComponent({
                   error={errors.code?.[0] ?? "　"}
                   placeholder="请输入验证码"
                   onClick={onClickSendValidationCode}
-                  countFrom={1}
+                  countFrom={3}
                   disabled={refDisabled.value}
                   ref={refValidationCode}
                 />
