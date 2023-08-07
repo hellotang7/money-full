@@ -63,6 +63,13 @@ export class Http {
 
 export const http = new Http("/api/v1");
 
+http.instance.interceptors.request.use((config) => {
+  const jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    config.headers!.Authorization = `Bearer ${jwt}`; //如果本地jwt存在，则将其添加到请求头中的Authorization字段中
+  }
+  return config;
+});
 http.instance.interceptors.response.use(
   (response) => {
     console.log("拦截成功");

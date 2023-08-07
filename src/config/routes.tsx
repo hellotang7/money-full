@@ -16,6 +16,7 @@ import { TagCreate } from "../components/tags/TagCreate";
 import { TagEdit } from "../components/tags/TagEdit";
 import { SignInPage } from "../views/SignInPage";
 import { StatisticsPage } from "../views/StatisticsPage";
+import { http } from "../shared/Http";
 
 export const routes = [
   { path: "/", redirect: "/welcome" },
@@ -54,6 +55,16 @@ export const routes = [
   {
     path: "/items",
     component: ItemPage,
+    beforeEnter: (to, from, next) => {
+      http
+        .get("/me")
+        .catch(() => {
+          next("sign_in?return_to=" + to.path); //登录完成后跳转到之前点击的路径
+        })
+        .then(() => {
+          next();
+        });
+    },
     children: [
       { path: "", component: ItemList },
       { path: "create", component: ItemCreate },
