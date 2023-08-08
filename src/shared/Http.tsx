@@ -6,7 +6,7 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from "axios";
-import { mockSession } from "../mock/mock";
+import { mockSession, mockTagIndex } from "../mock/mock";
 
 type GetConfig = Omit<AxiosRequestConfig, "params" | "url" | "method">;
 type PostConfig = Omit<AxiosRequestConfig, "url" | "data" | "method">;
@@ -125,14 +125,14 @@ const mock = (response: AxiosResponse) => {
     case "tagIndex":
       [response.status, response.data] = mockTagIndex(response.config);
       return true;
-    case "itemCreate":
-      [response.status, response.data] = mockItemCreate(response.config);
-      return true;
-    case "itemIndex":
-      [response.status, response.data] = mockItemIndex(response.config);
-      return true;
-    case "tagCreate":
-      [response.status, response.data] = mockTagCreate(response.config);
+    // case "itemCreate":
+    //   [response.status, response.data] = mockItemCreate(response.config);
+    //   return true;
+    // case "itemIndex":
+    //   [response.status, response.data] = mockItemIndex(response.config);
+    //   return true;
+    // case "tagCreate":
+    //   [response.status, response.data] = mockTagCreate(response.config);
     case "session":
       [response.status, response.data] = mockSession(response.config);
       return true;
@@ -168,7 +168,7 @@ http.instance.interceptors.response.use(
 //响应拦截
 http.instance.interceptors.response.use(
   (response) => {
-    return Response;
+    return response;
   },
   (error) => {
     if (error.response) {

@@ -1,10 +1,12 @@
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, onMounted, PropType, ref } from "vue";
 import s from "./ItemCreate.module.scss";
 import { MainLayout } from "../../layouts/MainLayout";
 import { Icon } from "../../shared/Icon";
 import { Tab, Tabs } from "../../shared/Tabs";
 import { InputPad } from "./InputPad";
 import { RouterLink } from "vue-router";
+import { http } from "../../shared/Http";
+import { Button } from "../../shared/Button";
 
 export const ItemCreate = defineComponent({
   props: {
@@ -13,71 +15,32 @@ export const ItemCreate = defineComponent({
     },
   },
   setup: (props, context) => {
-    const refKind = ref("支出");
-    const refExpensesTags = ref([
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-      { id: 1, name: "餐费", sign: "￥", caregory: "expenses" },
-      { id: 2, name: "打车", sign: "￥", caregory: "expenses" },
-      { id: 3, name: "租房", sign: "￥", caregory: "expenses" },
-    ]);
-    const refIncomeTags = ref([
-      { id: 4, name: "工资", sign: "￥", caregory: "income" },
-      { id: 5, name: "发传单", sign: "￥", caregory: "income" },
-      { id: 6, name: "诈骗", sign: "￥", caregory: "income" },
-      { id: 4, name: "工资", sign: "￥", caregory: "income" },
-      { id: 5, name: "发传单", sign: "￥", caregory: "income" },
-      { id: 6, name: "诈骗", sign: "￥", caregory: "income" },
-      { id: 4, name: "工资", sign: "￥", caregory: "income" },
-      { id: 5, name: "发传单", sign: "￥", caregory: "income" },
-      { id: 6, name: "诈骗", sign: "￥", caregory: "income" },
-      { id: 4, name: "工资", sign: "￥", caregory: "income" },
-      { id: 5, name: "发传单", sign: "￥", caregory: "income" },
-      { id: 6, name: "诈骗", sign: "￥", caregory: "income" },
-      { id: 4, name: "工资", sign: "￥", caregory: "income" },
-      { id: 5, name: "发传单", sign: "￥", caregory: "income" },
-      { id: 6, name: "诈骗", sign: "￥", caregory: "income" },
-    ]);
+    const refKind = ref("支出"); //默认支出
+    const refPage = ref(0); //当前第几页
+    const refHasMore = ref(false); //默认没有更多
+    onMounted(async () => {
+      const response = await http.get<Resources<Tag>>("tags", {
+        kind: "expenses",
+        _mock: "tagIndex",
+      });
+      const { resources, pager } = response.data;
+      refExpensesTags.value = resources; //获取支出标签
+      //判断是否需要加载下一页
+      refHasMore.value =
+        (pager.page - 1) * pager.per_page + resources.length < pager.count;
+      // console.log(refHasMore.value);
+    });
+
+    onMounted(async () => {
+      const response = await http.get<{ resources: Tag[] }>("tags", {
+        kind: "income",
+        _mock: "tagIndex",
+      });
+      refIncomeTags.value = response.data.resources; //获取收入标签
+    });
+    const refExpensesTags = ref<Tag[]>([]);
+    const refIncomeTags = ref<Tag[]>([]);
+
     return () => (
       <MainLayout class={s.layout}>
         {{
@@ -98,11 +61,20 @@ export const ItemCreate = defineComponent({
                         <div class={s.name}>{tag.name}</div>
                       </div>
                     ))}
-                    <div class={s.tag}>
-                      <div class={s.sign}>
-                        <Icon name="add" class={s.createTag} />
+                    <div>
+                      <div class={s.tag}>
+                        <div class={s.sign}>
+                          <Icon name="add" class={s.createTag} />
+                        </div>
+                        <div class={s.name}>新增</div>
                       </div>
-                      <div class={s.name}>新增</div>
+                      <div class={s.more}>
+                        {refHasMore.value ? (
+                          <Button class={s.loadMore}>加载更多</Button>
+                        ) : (
+                          <span class={s.loadMore}>没有更多了</span>
+                        )}
+                      </div>
                     </div>
                   </Tab>
                   <Tab name="收入" class={s.tags_wrapper}>

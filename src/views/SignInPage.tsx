@@ -60,7 +60,7 @@ export const SignInPage = defineComponent({
         //   })
         //   .catch(onError);
 
-        console.log(response.data.jwt);
+        // console.log(response);
 
         localStorage.setItem("jwt", response.data.jwt);
 
