@@ -7,11 +7,25 @@ declare module "*.vue" {
   export default component;
 }
 
+// declare module "*.scss" {
+//   const content: Record<string, any> = {};
+//   export default content;
+// }
+
 type Tag = {
   id: number;
   user_id: number;
   name: string;
   sign: string;
+  kind: expenses | income;
+};
+
+type Item = {
+  id: number;
+  user_id: number;
+  amount: number;
+  tag_ids: number[];
+  happened_at: string;
   kind: expenses | income;
 };
 
@@ -23,3 +37,11 @@ type Resources<T = any> = {
     count: number;
   };
 };
+type Resource<T> = {
+  resource: T;
+};
+
+
+type  ResourceError = {
+  errors:Record<string, string[]>
+}

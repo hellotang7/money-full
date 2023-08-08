@@ -9,11 +9,13 @@ export const InputPad = defineComponent({
   props: {
     happenAt: String,
     amount: Number,
+    onSubmit: {
+      type: Function as PropType<() => void>,
+    },
   },
   // emits: ["update:happenAt"],
   setup: (props, context) => {
     const refAmount = ref(props.amount ? (props.amount / 100).toString() : "0"); //现有的值
-
     const appendText = (n: number | string) => {
       const nString = n.toString(); //正在输入的值
       const dotIndex = refAmount.value.indexOf(".");
@@ -112,6 +114,7 @@ export const InputPad = defineComponent({
         text: "提交",
         onClick: () => {
           context.emit("update:amount", parseFloat(refAmount.value));
+          props.onSubmit?.();
         },
       },
     ];
