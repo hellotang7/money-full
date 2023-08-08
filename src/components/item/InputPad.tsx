@@ -7,13 +7,13 @@ import { RouterLink } from "vue-router";
 
 export const InputPad = defineComponent({
   props: {
-    name: {
-      type: String as PropType<string>,
-    },
+    happenAt: String,
+    amount: Number,
   },
+  // emits: ["update:happenAt"],
   setup: (props, context) => {
-    const refDate = ref<Date>();
-    const refAmount = ref("0"); //现有的值
+    const refAmount = ref(props.amount ? (props.amount / 100).toString() : "0"); //现有的值
+
     const appendText = (n: number | string) => {
       const nString = n.toString(); //正在输入的值
       const dotIndex = refAmount.value.indexOf(".");
@@ -108,14 +108,19 @@ export const InputPad = defineComponent({
           refAmount.value = "0";
         },
       },
-      { text: "提交", onClick: () => {} },
+      {
+        text: "提交",
+        onClick: () => {
+          context.emit("update:amount", parseFloat(refAmount.value));
+        },
+      },
     ];
 
     const refDatePickerVisible = ref(false);
     const showDatePicker = () => (refDatePickerVisible.value = true);
     const hideDatePicker = () => (refDatePickerVisible.value = false);
     const setDate = (date: Date) => {
-      refDate.value = date;
+      context.emit("update:happenAt", date.toISOString());
       hideDatePicker();
     };
 
@@ -126,13 +131,13 @@ export const InputPad = defineComponent({
             <Icon name="date" class={s.icon} />
 
             <span onClick={showDatePicker}>
-              {new Time(refDate.value).format()}
+              {new Time(props.happenAt).format()}
             </span>
 
             <Popup position="bottom" v-model:show={refDatePickerVisible.value}>
               <DatetimePicker
                 type="date"
-                value={refDate.value}
+                value={props.happenAt}
                 title="选择年月日"
                 onConfirm={setDate}
                 onCancel={hideDatePicker}
