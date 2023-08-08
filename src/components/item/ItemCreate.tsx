@@ -7,6 +7,7 @@ import { InputPad } from "./InputPad";
 import { RouterLink } from "vue-router";
 import { http } from "../../shared/Http";
 import { Button } from "../../shared/Button";
+import { useTags } from "../../shared/useTags";
 
 export const ItemCreate = defineComponent({
   props: {
@@ -16,30 +17,30 @@ export const ItemCreate = defineComponent({
   },
   setup: (props, context) => {
     const refKind = ref("支出"); //默认支出
-    const refPage = ref(0); //当前第几页
-    const refHasMore = ref(false); //默认没有更多
-    onMounted(async () => {
-      const response = await http.get<Resources<Tag>>("tags", {
-        kind: "expenses",
-        _mock: "tagIndex",
-      });
-      const { resources, pager } = response.data;
-      refExpensesTags.value = resources; //获取支出标签
-      //判断是否需要加载下一页
-      refHasMore.value =
-        (pager.page - 1) * pager.per_page + resources.length < pager.count;
-      // console.log(refHasMore.value);
-    });
+    // const refIncomeTags = ref<Tag[]>([]); //收入标签
 
-    onMounted(async () => {
-      const response = await http.get<{ resources: Tag[] }>("tags", {
-        kind: "income",
+    const {
+      tags: expensesTags,
+      hasMore,
+      ferchTags,
+    } = useTags((page) => {
+      return http.get<Resources<Tag>>("tags", {
+        kind: "expenses",
+        page: page + 1,
         _mock: "tagIndex",
       });
-      refIncomeTags.value = response.data.resources; //获取收入标签
     });
-    const refExpensesTags = ref<Tag[]>([]);
-    const refIncomeTags = ref<Tag[]>([]);
+    const {
+      tags: incomeTags,
+      hasMore: hasMore2,
+      ferchTags: fachTags2,
+    } = useTags((page) => {
+      return http.get<Resources<Tag>>("tags", {
+        kind: "income",
+        page: page + 1,
+        _mock: "tagIndex",
+      });
+    });
 
     return () => (
       <MainLayout class={s.layout}>
@@ -55,40 +56,53 @@ export const ItemCreate = defineComponent({
               <div class={s.wrapper}>
                 <Tabs v-model:selected={refKind.value} class={s.tabs}>
                   <Tab name="支出" class={s.tags_wrapper}>
-                    {refExpensesTags.value.map((tag) => (
-                      <div class={[s.tag, s.selected]}>
-                        <div class={s.sign}>{tag.sign}</div>
-                        <div class={s.name}>{tag.name}</div>
-                      </div>
-                    ))}
-                    <div>
-                      <div class={s.tag}>
-                        <div class={s.sign}>
-                          <Icon name="add" class={s.createTag} />
-                        </div>
-                        <div class={s.name}>新增</div>
-                      </div>
-                      <div class={s.more}>
-                        {refHasMore.value ? (
-                          <Button class={s.loadMore}>加载更多</Button>
-                        ) : (
-                          <span class={s.loadMore}>没有更多了</span>
-                        )}
-                      </div>
-                    </div>
-                  </Tab>
-                  <Tab name="收入" class={s.tags_wrapper}>
-                    {refIncomeTags.value.map((tag) => (
-                      <div class={[s.tag, s.selected]}>
-                        <div class={s.sign}>{tag.sign}</div>
-                        <div class={s.name}>{tag.name}</div>
-                      </div>
-                    ))}
                     <div class={s.tag}>
                       <div class={s.sign}>
                         <Icon name="add" class={s.createTag} />
                       </div>
                       <div class={s.name}>新增</div>
+                    </div>
+
+                    {expensesTags.value.map((tag) => (
+                      <div class={[s.tag, s.selected]}>
+                        <div class={s.sign}>{tag.sign}</div>
+                        <div class={s.name}>{tag.name}</div>
+                      </div>
+                    ))}
+
+                    <div class={s.more}>
+                      {hasMore.value ? (
+                        <Button onClick={ferchTags} class={s.loadMore}>
+                          加载更多
+                        </Button>
+                      ) : (
+                        <span class={s.loadMore}>没有更多了</span>
+                      )}
+                    </div>
+                  </Tab>
+                  <Tab name="收入" class={s.tags_wrapper}>
+                    <div class={s.tag}>
+                      <div class={s.sign}>
+                        <Icon name="add" class={s.createTag} />
+                      </div>
+                      <div class={s.name}>新增</div>
+                    </div>
+
+                    {incomeTags.value.map((tag) => (
+                      <div class={[s.tag, s.selected]}>
+                        <div class={s.sign}>{tag.sign}</div>
+                        <div class={s.name}>{tag.name}</div>
+                      </div>
+                    ))}
+
+                    <div class={s.more}>
+                      {hasMore2.value ? (
+                        <Button onClick={fachTags2} class={s.loadMore}>
+                          加载更多
+                        </Button>
+                      ) : (
+                        <span class={s.loadMore}>没有更多了</span>
+                      )}
                     </div>
                   </Tab>
                 </Tabs>

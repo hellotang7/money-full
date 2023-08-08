@@ -16,8 +16,8 @@ export const mockSession: Mock = (config) => {
 
 export const mockTagIndex: Mock = (config) => {
   const { kind, page } = config.params;
-  const per_page = 25;
-  const count = 26;
+  const per_page = 24;
+  const count = 40;
   let id = 0;
   const createId = () => {
     id += 1;
@@ -44,11 +44,13 @@ export const mockTagIndex: Mock = (config) => {
     pager: createPaper(page),
   });
 
-  if (kind === "expenses" && (page === 1 || !page)) {
-    return [200, createBody(25)];
+  if (kind === "expenses" && (!page || page === 1)) {
+    return [200, createBody(24)];
   } else if (kind === "expenses" && page === 2) {
-    return [200, createBody(1)];
-  } else {
-    return [200, { resources: createTag(24) }];
+    return [200, createBody(16)];
+  } else if ((kind === "income" && !page) || page === 1) {
+    return [200, createBody(24)];
+  } else if (kind === "income" && page === 2) {
+    return [200, createBody(16)];
   }
 };
