@@ -1,13 +1,10 @@
-import { defineComponent, onMounted, PropType, reactive, ref } from "vue";
+import { defineComponent, PropType, reactive } from "vue";
 import s from "./ItemCreate.module.scss";
 import { MainLayout } from "../../layouts/MainLayout";
-import { Icon } from "../../shared/Icon";
 import { Tab, Tabs } from "../../shared/Tabs";
 import { InputPad } from "./InputPad";
-import { RouterLink, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { http } from "../../shared/Http";
-import { Button } from "../../shared/Button";
-import { useTags } from "../../shared/useTags";
 import { Tags } from "./Tags";
 import { Dialog } from "vant";
 import { AxiosError } from "axios";

@@ -14,7 +14,7 @@ export const TagCreate = defineComponent({
       <MainLayout>
         {{
           title: () => "新建标签",
-          icon: () => <BackIcon onClick={() => {}} />,
+          icon: () => <BackIcon />,
           default: () => <TagForm />,
         }}
       </MainLayout>
