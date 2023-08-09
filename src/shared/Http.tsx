@@ -6,8 +6,13 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from "axios";
-import {mockItemCreate, mockSession, mockTagIndex} from '../mock/mock';
-import el from '@faker-js/faker/locales/el';
+import {
+  mockItemCreate,
+  mockSession,
+  mockTagIndex,
+  mocktagShow,
+} from "../mock/mock";
+import el from "@faker-js/faker/locales/el";
 
 type GetConfig = Omit<AxiosRequestConfig, "params" | "url" | "method">;
 type PostConfig = Omit<AxiosRequestConfig, "url" | "data" | "method">;
@@ -137,6 +142,9 @@ const mock = (response: AxiosResponse) => {
     case "session":
       [response.status, response.data] = mockSession(response.config);
       return true;
+    case "tagShow":
+      [response.status, response.data] = mocktagShow(response.config);
+      return true;
   }
   return false;
 };
@@ -153,14 +161,14 @@ http.instance.interceptors.request.use((config) => {
 });
 
 http.instance.interceptors.response.use(
-    (response) => {
-      mock(response);
-      if (response.status >= 400) {
-        throw {response};
-      } else {
-        return response;
-      }
-    },
+  (response) => {
+    mock(response);
+    if (response.status >= 400) {
+      throw { response };
+    } else {
+      return response;
+    }
+  },
   (error) => {
     mock(error.response);
     if (error.response.status >= 400) {
