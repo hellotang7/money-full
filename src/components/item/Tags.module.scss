@@ -8,7 +8,9 @@
     }
 }
 
-
+.tags_wrapper{
+    display: flex;
+    flex-wrap: wrap;
 
 .tag {
     position: relative;
@@ -42,4 +44,4 @@
             border-color: var(--main);
         }
     }
-}
+}}
