@@ -1,4 +1,4 @@
-import {defineComponent, onMounted, PropType, reactive, ref} from 'vue';
+import {defineComponent, onMounted, PropType, reactive, ref, watch} from 'vue';
 import s from './ItemSummary.module.scss';
 import {FloartButton} from '../../shared/FloartButton';
 import {Button} from '../../shared/Button';
@@ -22,21 +22,10 @@ export const ItemSummary = defineComponent({
         const hasMore = ref(false);
         const page = ref(0);
         const itemsBalance = reactive({
-          expenses:0,income:0,balance:0
-        })
-      onMounted(async ()=>{
-        if (!props.startDate || !props.endDate) {
-          return;
-        }
-        const response = await http.get('/items/balance', {
-          happen_after: props.startDate,
-          happen_before: props.endDate,
-          page: page.value + 1,
-          _mock: 'itemIndexBalance'
+            expenses: 0, income: 0, balance: 0
         });
-          console.log(response.data);
-        Object.assign(itemsBalance,response.data)
-      })
+
+
         const fetchItems = async () => {
             if (!props.startDate || !props.endDate) {
                 return;
@@ -53,6 +42,32 @@ export const ItemSummary = defineComponent({
             page.value += 1;
         };
         onMounted(fetchItems);
+        const fetchItemBalance = async () => {
+            if (!props.startDate || !props.endDate) {
+                return;
+            }
+            const response = await http.get('/items/balance', {
+                happen_after: props.startDate,
+                happen_before: props.endDate,
+                page: page.value + 1,
+                _mock: 'itemIndexBalance'
+            });
+            Object.assign(itemsBalance, response.data);
+        };
+        onMounted(fetchItemBalance);
+
+        watch(() => [props.startDate, props.endDate], () => {
+            items.value = [];
+            hasMore.value = false;
+            page.value = 0;
+            Object.assign(itemsBalance, {
+                expenses: 0, income: 0, balance: 0
+            });
+            fetchItems();
+            fetchItemBalance();
+        });
+
+
         return () => (
             <div class={s.wrapper}>
                 {items.value ? (<>
@@ -74,14 +89,14 @@ export const ItemSummary = defineComponent({
                         {items.value.map((item) => (
                             <li>
                                 <div class={s.sign}>
-                                    <span>{item.tags_id[0]}</span>
+                                    <span>{item.tags![0].sign}</span>
                                 </div>
                                 <div class={s.text}>
                                     <div class={s.tagAndAmount}>
-                                        <span class={s.tag}>{item.tags_id[0]}</span>
+                                        <span class={s.tag}>{item.tags![0].name}</span>
                                         <span class={s.amount}>￥<Money value={item.amount}/></span>
                                     </div>
-                                    <div class={s.time}><Datetime value={item.happen_at}/></div>
+                                    <div class={s.time}><Datetime value={item.happened_at}/></div>
                                 </div>
                             </li>
                         ))}

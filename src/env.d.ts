@@ -23,6 +23,7 @@ type Item = {
   tag_ids: number[];
   happened_at: string;
   kind: expenses | income;
+  tags?:Tag[]
 };
 
 type Resources<T = any> = {
