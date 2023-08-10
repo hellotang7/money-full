@@ -69,7 +69,8 @@ const {kind,page} = config.params
 
   const createBody = (n=1,attrs?:any)=>({
     resources: createItem(n),
-    pager: createPager(page)
+    pager: createPager(page),
+
   })
   if (page === 1){
     return [200,createBody(10)]
@@ -80,6 +81,13 @@ const {kind,page} = config.params
   }
 }
 
+export const mockItemIndexBalance: Mock = (config) => {
+  return [200, {
+    income: 9900,
+    expenses: 8900,
+    balance: 1000,
+  }];
+};
 export const mockTagEdit: Mock = (config) => {
   const createTag = (attrs?: any) => ({
     id: createId(),
