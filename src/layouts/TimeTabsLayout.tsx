@@ -6,6 +6,7 @@ import { OverlayIcon } from "../shared/Overlay";
 import { Tab, Tabs } from "../shared/Tabs";
 import { Overlay } from "vant";
 import { Form, FormItem } from "../shared/Form";
+import {log} from 'echarts/types/src/util/log';
 
 const demo = defineComponent({
   props: {
@@ -69,6 +70,7 @@ export const TimeTabsLayout = defineComponent({
           icon: () => <OverlayIcon />,
           default: () => (
             <>
+
               <Tabs
                 v-model:selected={refSelected.value}
                 onUpdate:selected={onSelect}
@@ -82,7 +84,7 @@ export const TimeTabsLayout = defineComponent({
                 <Tab name="上月">
                   <props.component
                     startDate={timeList[1].start}
-                    endDate={timeList[0].end}
+                    endDate={timeList[1].end}
                   />
                 </Tab>
                 <Tab name="今年">

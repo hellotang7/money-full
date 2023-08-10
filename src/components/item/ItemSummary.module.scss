@@ -74,6 +74,10 @@
 }
 
 .more {
-    padding-top: 32px;
+    padding: 16px;
+    //width: 100vw;
     text-align: center;
+    >Button{
+        //width: 100%;
+    }
 }
