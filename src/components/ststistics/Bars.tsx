@@ -5,7 +5,7 @@ import {Tag} from '../../env';
 export const Bars = defineComponent({
   props:{
     data:{
-      type:Array as PropType<{ tag:Tag[],amount:number ,percent:number}[]>,
+      type:Array as PropType<{ tag:Tag,amount:number ,percent:number}[]>,
       required:true
     }
   },
