@@ -17,6 +17,7 @@ const demo = defineComponent({
       type: String as PropType<string>,
       required: false,
     },
+
   },
 });
 
@@ -29,6 +30,10 @@ export const TimeTabsLayout = defineComponent({
     rerenderOnSwitchTab:{
       type:Boolean,
       default:false
+    },
+    hideThisYear: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -76,37 +81,66 @@ export const TimeTabsLayout = defineComponent({
           title: () => "山竹记账",
           icon: () => <OverlayIcon />,
           default: () => (
-            <>
-              <Tabs
-                v-model:selected={refSelected.value}
-                onUpdate:selected={onSelect}
-                rerenderOnSelect={props.rerenderOnSwitchTab}
-              >
-                <Tab name="本月">
-                  <props.component
-                    startDate={timeList[0].start}
-                    endDate={timeList[0].end}
-                  />
-                </Tab>
-                <Tab name="上月">
-                  <props.component
-                    startDate={timeList[1].start}
-                    endDate={timeList[1].end}
-                  />
-                </Tab>
-                <Tab name="今年">
-                  <props.component
-                    startDate={timeList[2].start}
-                    endDate={timeList[2].end}
-                  />
-                </Tab>
-                <Tab name="自定义时间">
-                  <props.component
-                    startDate={customTime.start}
-                    endDate={customTime.end}
-                  />
-                </Tab>
-              </Tabs>
+              <>
+                {props.hideThisYear
+                    ?
+                    <Tabs
+                        v-model:selected={refSelected.value}
+                        onUpdate:selected={onSelect}
+                        rerenderOnSelect={props.rerenderOnSwitchTab}
+                    >
+                      <Tab name="本月">
+                        <props.component
+                            startDate={timeList[0].start}
+                            endDate={timeList[0].end}
+                        />
+                      </Tab>
+                      <Tab name="上月">
+                        <props.component
+                            startDate={timeList[1].start}
+                            endDate={timeList[1].end}
+                        />
+                      </Tab>
+
+                      <Tab name="自定义时间">
+                        <props.component
+                            startDate={customTime.start}
+                            endDate={customTime.end}
+                        />
+                      </Tab>
+                    </Tabs>
+                    :
+                    <Tabs
+                        v-model:selected={refSelected.value}
+                        onUpdate:selected={onSelect}
+                        rerenderOnSelect={props.rerenderOnSwitchTab}
+                    >
+                      <Tab name="本月">
+                        <props.component
+                            startDate={timeList[0].start}
+                            endDate={timeList[0].end}
+                        />
+                      </Tab>
+                      <Tab name="上月">
+                        <props.component
+                            startDate={timeList[1].start}
+                            endDate={timeList[1].end}
+                        />
+                      </Tab>
+                      <Tab name="今年">
+                        <props.component
+                            startDate={timeList[2].start}
+                            endDate={timeList[2].end}
+                        />
+                      </Tab>
+                      <Tab name="自定义时间">
+                        <props.component
+                            startDate={customTime.start}
+                            endDate={customTime.end}
+                        />
+                      </Tab>
+                    </Tabs>
+                }
               <Overlay show={refOverlayVisible.value} class={s.overlay}>
                 <div class={s.overlay_inner}>
                   <header>请选择时间</header>

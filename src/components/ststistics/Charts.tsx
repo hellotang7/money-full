@@ -38,22 +38,6 @@ export const Charts = defineComponent({
               return [new Date(time).toISOString(),amount]
           })
 
-          // const array = [];
-          // const diff = new Date(props.endDate).getTime() - new Date(props.startDate).getTime();
-          // const n = diff / DAY + 1;
-          // let data1Index = 0
-          // for (let i=0; i<n; i++) {
-          //     const time = new Time(props.startDate+'T00:00:00.000+0800').add(i, 'day').getTimestamp()
-          //     if(data1.value[data1Index] && new Date(data1.value[data1Index].happen_at).getTime() === time){
-          //         array.push([new Date(time).toISOString(),data1.value[data1Index].amount])
-          //         data1Index += 1
-          //     }else {
-          //         array.push([new Date(time).toISOString(), 0]);
-          //     }
-          // }
-          // console.log(array);
-          //
-          // return array as [string,number][]
       })
 
     onMounted(async ()=>{

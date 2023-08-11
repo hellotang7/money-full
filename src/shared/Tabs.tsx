@@ -12,15 +12,18 @@ export const Tabs = defineComponent({
   },
   emits: ["update:selected"],
   setup: (props, context) => {
-    const tabs = context.slots.default?.();
 
-    if (!tabs) return () => null;
-    for (let i = 0; i < tabs.length; i++) {
-      if (tabs[i].type !== Tab) {
-        throw new Error("<Tabs> only accepts <Tabs> as children");
-      }
-    }
     return () => {
+      const tabs = context.slots.default?.();
+
+      if (!tabs) return () => null;
+      for (let i = 0; i < tabs.length; i++) {
+        if (tabs[i].type !== Tab) {
+          throw new Error("<Tabs> only accepts <Tabs> as children");
+        }
+      }
+
+
       return (
         <div class={s.tabs}>
           <ol class={s.tabs_nav}>
