@@ -153,9 +153,9 @@ export const mockSession: Mock = (config) => {
 export const mockItemSummary:Mock = config =>{
   return [200,{
     groups: [
-      {"happen_at": "2023-08-18T00:00:00.000+0800", "amount": 600},
+      {"happen_at": "2023-08-17T00:00:00.000+0800", "amount": 700},
       {"happen_at": "2023-08-19T00:00:00.000+0800", "amount": 400},
-      {"happen_at": "2023-08-20T00:00:00.000+0800", "amount": 550},
+      {"happen_at": "2023-08-28T00:00:00.000+0800", "amount": 550},
     ],
     summary: 600
   }]
