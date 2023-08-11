@@ -1,18 +1,7 @@
 // import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from "axios";
-import {
-  mockItemCreate, mockItemIndex, mockItemIndexBalance,
-  mockSession,
-  mockTagEdit,
-  mockTagIndex,
-  mocktagShow,
-} from '../mock/mock';
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse,} from "axios";
+import {mockItemCreate, mockItemIndex, mockItemIndexBalance, mockItemSummary, mockSession, mockTagEdit, mockTagIndex, mocktagShow,} from '../mock/mock';
 // import el from "@faker-js/faker/locales/el";
 
 type GetConfig = Omit<AxiosRequestConfig, "params" | "url" | "method">;
@@ -147,7 +136,10 @@ const mock = (response: AxiosResponse) => {
       return true;
     // case "tagCreate":
     //   [response.status, response.data] = mockTagCreate(response.config);
-    case "session":
+    case "itemSummary":
+      [response.status, response.data] = mockItemSummary(response.config);
+      return true;
+      case "session":
       [response.status, response.data] = mockSession(response.config);
       return true;
     case "tagShow":

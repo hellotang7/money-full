@@ -47,7 +47,6 @@ export const mockTagIndex: Mock = (config) => {
     return [200, createBody(16)];
   }
 };
-
 export const mockItemIndex:Mock = (config)=>{
 const {kind,page} = config.params
   const per_page = 10
@@ -91,7 +90,6 @@ const {kind,page} = config.params
     return[200,{}]
   }
 }
-
 export const mockItemIndexBalance: Mock = (config) => {
   return [200, {
     income: 9900,
@@ -109,7 +107,6 @@ export const mockTagEdit: Mock = (config) => {
   });
   return [200, { resource: createTag() }];
 };
-
 export const mocktagShow: Mock = (config) => {
   const createTag = (attrs?: any) => ({
     id: createId(),
@@ -120,7 +117,6 @@ export const mocktagShow: Mock = (config) => {
   });
   return [200, { resource: createTag() }];
 };
-
 export const mockItemCreate: Mock = (config) => {
   return [
     200,
@@ -145,8 +141,6 @@ export const mockItemCreate: Mock = (config) => {
   //   }
   // }]
 };
-
-
 export const mockSession: Mock = (config) => {
   return [
     200,
@@ -155,3 +149,14 @@ export const mockSession: Mock = (config) => {
     },
   ];
 };
+
+export const mockItemSummary:Mock = config =>{
+  return [200,{
+    groups: [
+      {"happen_at": "2018-06-20T00:00:00.000+0800", "amount": 300},
+      {"happen_at": "2018-06-19T00:00:00.000+0800", "amount": 200},
+      {"happen_at": "2018-06-18T00:00:00.000+0800", "amount": 100},
+    ],
+    summary: 600
+  }]
+}

@@ -6,7 +6,6 @@ import { OverlayIcon } from "../shared/Overlay";
 import { Tab, Tabs } from "../shared/Tabs";
 import { Overlay } from "vant";
 import { Form, FormItem } from "../shared/Form";
-import {log} from 'echarts/types/src/util/log';
 
 const demo = defineComponent({
   props: {
