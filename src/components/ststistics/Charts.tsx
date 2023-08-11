@@ -6,6 +6,7 @@ import {PieChart} from './PieChart';
 import {Bars} from './Bars';
 import {http} from '../../shared/Http';
 import {Time} from '../../shared/time';
+import {Tag} from '../../env';
 
 const DAY = 24 * 3600 * 1000;
 type Data1Item = { happen_at: string, amount: number }
@@ -76,6 +77,20 @@ export const Charts = defineComponent({
 
         })
 
+
+        //data3
+
+        const betterData3 = computed<{ tag: Tag[], amount: number, percent: number }[]>(() => {
+                  const total = data2.value.reduce((sum, item) => sum + item.amount, 0);
+                  return data2.value.map((item) => ({
+                    ...item,
+                    percent: Math.round((item.amount / total) * 100)
+                  }));
+
+
+
+        });
+
         return () => (
             <div class={s.wrapper}>
                 <FormItem
@@ -89,7 +104,7 @@ export const Charts = defineComponent({
                 />
                 <LineChart data={betterData1.value}/>
                 <PieChart data={betterData2.value}/>
-                <Bars/>
+                <Bars data={betterData3.value}/>
             </div>
         );
     },
