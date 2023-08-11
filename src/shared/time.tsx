@@ -27,7 +27,7 @@ export class Time {
       .replace(/ss/, second.toString().padStart(2, "0"))
       .replace(/SSS/, msecond.toString().padStart(3, "0"));
   }
-  firstDayOfMonth() {
+ firstDayOfMonth() {
     return new Time(
       new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0)
     );
