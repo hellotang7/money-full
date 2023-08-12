@@ -17,7 +17,7 @@ export const SignInPage = defineComponent({
     const route = useRoute();
     const formData = reactive({
       email: "2714148252@qq.com",
-      code: "873059",
+      code: "197512",
     });
     const errors = reactive({
       email: [],
@@ -53,7 +53,7 @@ export const SignInPage = defineComponent({
 
       if (!hasError(errors)) {
         const response = await http
-          .post<{ jwt: string }>("/session", formData)
+          .post<{ jwt: string }>("/session", {formData})
           .catch(onError);
         // const response = await http
         //   .post<{ jwt: string }>("/session", formData, {
@@ -80,7 +80,7 @@ export const SignInPage = defineComponent({
     const onClickSendValidationCode = async () => {
       disabled();
       const response = await http
-        .post("/validation_codes", { email: formData.email })
+        .post("/validation_codes", { email: formData.email },{_autoLoading: true})
         .catch(onError)
         .finally(enable);
       //成功

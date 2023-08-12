@@ -53,8 +53,8 @@ export const Charts = defineComponent({
                 happen_before: props.endDate,
                 kind:kind.value,
                 group_by:'happen_at',
-                _mock: 'itemSummary'
-            });
+
+            },{ _mock: 'itemSummary'});
             data1.value = response.data.groups;
 
         }
@@ -67,8 +67,8 @@ export const Charts = defineComponent({
                 happen_before:props.endDate,
                 kind:kind.value,
                 group_by:'tag_id',
-                _mock:'itemSummary'
-            })
+
+            },{ _mock:'itemSummary'})
             data2.value = response.data.groups
         }
         const data2 = ref<Data2>([])
@@ -101,7 +101,6 @@ export const Charts = defineComponent({
                         {value: 'income', text: '收入'},
                     ]}
                 />
-                {kind.value}
                 <LineChart data={betterData1.value}/>
                 <PieChart data={betterData2.value}/>
                 <Bars data={betterData3.value}/>
