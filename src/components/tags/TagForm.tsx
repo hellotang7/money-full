@@ -6,6 +6,7 @@ import { Form, FormItem } from "../../shared/Form";
 import { useRoute, useRouter } from "vue-router";
 import { http } from "../../shared/Http";
 import { onFormError } from "../../shared/onFormError";
+import {Resource, Tag} from '../../env';
 
 export const TagForm = defineComponent({
   props: {
@@ -42,8 +43,8 @@ export const TagForm = defineComponent({
       Object.assign(errors, validate(formData, rules));
       if (!hasError(errors)) {
         const promise = (await formData.id)
-          ? http.patch(`/tags/${formData.id}`, formData, {_mock: "tagEdit"})
-          : http.post("/tags", formData, {_mock: "tagCreate"});
+          ?  http.patch(`/tags/${formData.id}`, formData, { _mock: 'tagEdit', _autoLoading: true })
+          : http.post('/tags', formData, { _mock: 'tagCreate', _autoLoading: true })
 
         await promise.catch((error) => {
           onFormError(error, (data) => {
@@ -57,8 +58,9 @@ export const TagForm = defineComponent({
       if (!props.id) {
         return;
       }
-      const response = await http.get<Resource<Tag>>(`/tags/${props.id}`, {_mock: "tagShow",});
-      console.log(response);
+      const response = await http.get<Resource<Tag>>(`/tags/${props.id}`, {
+        _mock: "tagShow",
+      });
       Object.assign(formData, response.data.resource);
     });
     return () => (

@@ -35,12 +35,12 @@ export const ItemCreate = defineComponent({
     };
     const onSubmit = async () => {
       await http
-        .post<Resource<Item>>("/items", formData, { _mock: "itemCreate" })
+        .post<Resource<Item>>("/items", formData, { _mock: "itemCreate" ,_autoLoading: true})
         .catch(onError);
-      Dialog.alert({
-        title: "成功",
-        message: "添加成功",
-      });
+      // Dialog.alert({
+      //   title: "成功",
+      //   message: "添加成功",
+      // });
       router.push("/items");
     };
 

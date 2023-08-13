@@ -17,7 +17,7 @@ export const SignInPage = defineComponent({
     const route = useRoute();
     const formData = reactive({
       email: "2714148252@qq.com",
-      code: "197512",
+      code: "",
     });
     const errors = reactive({
       email: [],
@@ -53,7 +53,7 @@ export const SignInPage = defineComponent({
 
       if (!hasError(errors)) {
         const response = await http
-          .post<{ jwt: string }>("/session", {formData})
+            .post<{ jwt: string }>('/session', formData, {_autoLoading: true})
           .catch(onError);
         // const response = await http
         //   .post<{ jwt: string }>("/session", formData, {
