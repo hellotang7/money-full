@@ -20,7 +20,7 @@ export const Tags = defineComponent({
         kind: props.kind,
         page: page + 1,
 
-      },{ _mock: "tagIndex"});
+      },{ _mock: "tagIndex",_autoLoading:true});
     });
     const onSelect = (tag: Tag) => {
       context.emit("update:selected", tag.id);
@@ -30,7 +30,7 @@ export const Tags = defineComponent({
     const router = useRouter();
     const onLongPress = (id: number) => {
       // console.log("长按");
-      console.log(id);
+      // console.log(id);
 
       router.push(
         `/tags/${id}/edit?kind=${props.kind}return_to=${router.currentRoute.value.fullPath}`

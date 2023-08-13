@@ -23,7 +23,7 @@ export const TagEdit = defineComponent({
       }).then(async () => {
         await http.delete(`/tags/${numberId}`, {
           withItems: options?.withItems ? "true" : "false",
-        });
+        },{_autoLoading: true});
         // .catch(async () => {
         //   Dialog.confirm({
         //     title: "提示",

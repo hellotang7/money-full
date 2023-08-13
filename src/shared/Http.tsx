@@ -179,7 +179,7 @@ http.instance.interceptors.response.use((response)=>{
   if(error.response?.config._autoLoading===true){
     Toast.clear()
   }
-  throw  error
+  throw error
 })
 
 http.instance.interceptors.response.use(
