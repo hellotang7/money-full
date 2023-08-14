@@ -17,96 +17,22 @@ export class Http {
       baseURL,
     });
   }
-  //   //read
-  //   get<R = unknown>(
-  //     url: string,
-  //     query?: Record<string, string>,
-  //     config?: Omit<AxiosRequestConfig, "params" | "url" | "method">
-  //   ) {
-  //     return this.instance.request<R>({
-  //       ...config,
-  //       url: url,
-  //       params: query,
-  //       method: "get",
-  //     });
-  //   }
-  //   //create
-  //   post<R = unknown>(
-  //     url: string,
-  //     data?: Record<string, JSONValue>,
-  //     config?: Omit<AxiosRequestConfig, "url" | "data" | "method">
-  //   ) {
-  //     return this.instance.request<R>({
-  //       ...config,
-  //       url,
-  //       data,
-  //       method: "post",
-  //     });
-  //   }
-  //   //updata
-  //   patch<R = unknown>(
-  //     url: string,
-  //     data?: Record<string, JSONValue>,
-  //     config?: Omit<AxiosRequestConfig, "url" | "data">
-  //   ) {
-  //     return this.instance.request<R>({
-  //       ...config,
-  //       url,
-  //       data,
-  //       method: "patch",
-  //     });
-  //   }
-  //   //destroy
-  //   delete<R = unknown>(
-  //     url: string,
-  //     query?: Record<string, string>,
-  //     config?: Omit<AxiosRequestConfig, "params" | "url" | "method">
-  //   ) {
-  //     return this.instance.request<R>({
-  //       ...config,
-  //       url: url,
-  //       params: query,
-  //       method: "delete",
-  //     });
-  //   }
 
-  get<R = unknown>(
-    url: string,
-    query?: Record<string, JSONValue>,
-    config?: GetConfig
-  ) {
-    return this.instance.request<R>({
-      ...config,
-      url: url,
-      params: query,
-      method: "get",
-    });
+
+  get<R = unknown>(url: string, query?: Record<string, JSONValue>, config?: GetConfig) {
+    return this.instance.request<R>({...config, url: url, params: query, method: "get",});
   }
-  post<R = unknown>(
-    url: string,
-    data?: Record<string, JSONValue>,
-    config?: PostConfig
-  ) {
+  post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PostConfig) {
     return this.instance.request<R>({ ...config, url, data, method: "post" });
   }
-  patch<R = unknown>(
-    url: string,
-    data?: Record<string, JSONValue>,
-    config?: PatchConfig
+  patch<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PatchConfig
   ) {
     return this.instance.request<R>({ ...config, url, data, method: "patch" });
   }
-  delete<R = unknown>(
-    url: string,
-    query?: Record<string, string>,
-    config?: DeleteConfig
+  delete<R = unknown>(url: string, query?: Record<string, string>, config?: DeleteConfig
   ) {
-    return this.instance.request<R>({
-      ...config,
-      url: url,
-      params: query,
-      method: "delete",
-    });
+    return this.instance.request<R>({...config, url: url, params: query, method: "delete",}
+    );
   }
 }
 
@@ -116,37 +42,35 @@ const mock = (response: AxiosResponse) => {
     location.hostname !== "127.0.0.1" &&
     location.hostname !== "192.168.3.57"
   ) {
-    return false;
+    return true;
   }
-  switch (response.config?._mock) {
-    case "tagIndex":
-      [response.status, response.data] = mockTagIndex(response.config);
-      return true;
-    case "itemCreate":
-      [response.status, response.data] = mockItemCreate(response.config);
-      return true;
-    case "tagEdit":
-      [response.status, response.data] = mockTagEdit(response.config);
-      return true;
-
-    case "itemIndex":
-      [response.status, response.data] = mockItemIndex(response.config);
-      return true;
-    case 'itemIndexBalance':
-      [response.status, response.data] = mockItemIndexBalance(response.config);
-      return true;
-    // case "tagCreate":
-    //   [response.status, response.data] = mockTagCreate(response.config);
-    case "itemSummary":
-      [response.status, response.data] = mockItemSummary(response.config);
-      return true;
-      case "session":
-      [response.status, response.data] = mockSession(response.config);
-      return true;
-    case "tagShow":
-      [response.status, response.data] = mocktagShow(response.config);
-      return true;
-  }
+  // switch (response.config?._mock) {
+  //   case "tagIndex":
+  //     [response.status, response.data] = mockTagIndex(response.config);
+  //     return true;
+  //   case "itemCreate":
+  //     [response.status, response.data] = mockItemCreate(response.config);
+  //     return true;
+  //   case "tagEdit":
+  //     [response.status, response.data] = mockTagEdit(response.config);
+  //     return true;
+  //
+  //   case "itemIndex":
+  //     [response.status, response.data] = mockItemIndex(response.config);
+  //     return true;
+  //   case 'itemIndexBalance':
+  //     [response.status, response.data] = mockItemIndexBalance(response.config);
+  //     return true;
+  //   case "itemSummary":
+  //     [response.status, response.data] = mockItemSummary(response.config);
+  //     return true;
+  //     case "session":
+  //     [response.status, response.data] = mockSession(response.config);
+  //     return true;
+  //   case "tagShow":
+  //     [response.status, response.data] = mocktagShow(response.config);
+  //     return true;
+  // }
   return false;
 };
 

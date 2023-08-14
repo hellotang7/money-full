@@ -90,7 +90,7 @@ export const ItemSummary = defineComponent({
                         </li>
                         <li>
                             <span>净收入</span>
-                            <span>+{itemsBalance.balance}</span>
+                            <span>{itemsBalance.balance}</span>
                         </li>
                     </ul>
                     <ol class={s.list}>
