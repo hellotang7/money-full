@@ -1,21 +1,15 @@
-import { defineComponent,PropType } from 'vue';
-
+import { defineComponent, PropType } from 'vue'
 export const Money = defineComponent({
   props: {
     value: {
       type: Number as PropType<number>,
-        required:true
-    }
+      required: true,
+    },
   },
-
   setup: (props, context) => {
-    return () => (
-        <span>{addZero(props.value / 100)}</span>
-    );
-  }
-
-
-});
+    return () => <span>{addZero(props.value / 100)}</span>
+  },
+})
 
 const addZero = (n: number) => {
   const nString = n.toString()
@@ -31,5 +25,3 @@ const addZero = (n: number) => {
 export const getMoney = (n: number) => {
   return addZero(n / 100)
 }
-
-

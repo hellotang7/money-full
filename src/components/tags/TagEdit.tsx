@@ -21,15 +21,11 @@ export const TagEdit = defineComponent({
         title: "确认",
         message: "你真的要删除吗？",
       }).then(async () => {
-        await http.delete(`/tags/${numberId}`, {
-          withItems: options?.withItems ? "true" : "false",
-        },{_autoLoading: true});
-        // .catch(async () => {
-        //   Dialog.confirm({
-        //     title: "提示",
-        //     message: "删除失败",
-        //   });
-        // });
+        await http
+            .delete(`/tags/${numberId}`, {
+              with_items: options?.withItems ? 'true' : 'false',
+            }, {_autoLoading: true})
+
       });
       router.back();
     };
@@ -45,7 +41,7 @@ export const TagEdit = defineComponent({
                 <Button
                   level="danger"
                   class={s.removeTags}
-                  onClick={() => onDelete()}
+                  onClick={() => onDelete({ withItems: false })}
                 >
                   删除标签
                 </Button>
