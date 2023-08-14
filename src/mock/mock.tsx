@@ -68,11 +68,11 @@ export const mockItemIndex: Mock = (config) => {
             id: createId(),
             user_id: createId(),
             amount: Math.floor(Math.random() * 10000),
-            tags_id: [createId()],
+            tag_ids: [createId()],
             tags: [createTag()],
             happen_at: faker.date.past().toISOString(),
-            kind
-        }));
+            kind:config.params.kind
+        } as Item));
 
     const createBody = (n = 1, attrs?: any) => ({
         resources: createItem(n),
@@ -124,12 +124,12 @@ export const mockItemCreate: Mock = (config) => {
                 amount: 9900,
                 note: null,
                 tag_ids: [5630],
-                happened_at: '2020-10-30T00:00:00.000+08:00',
-                created_at: '2023-06-27T11:34:40.458+08:00',
-                updated_at: '2023-06-27T11:34:40.458+08:00',
+                happen_at: '2020-10-29T16:00:00.000Z',
+                created_at: '2022-07-03T15:35:56.301Z',
+                updated_at: '2022-07-03T15:35:56.301Z',
                 kind: 'expenses',
-            },
-        },
+            } as Item
+        }
     ];
     // return[422,{
     //   errors:{
