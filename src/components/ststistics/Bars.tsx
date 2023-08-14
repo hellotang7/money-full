@@ -1,8 +1,6 @@
 import {computed, defineComponent, onMounted, PropType} from 'vue';
 import s from "./Bars.module.scss";
 import {Money} from '../../shared/Money';
-import {Tag} from '../../env';
-import {Toast} from 'vant';
 export const Bars = defineComponent({
   props:{
     data:{

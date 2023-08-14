@@ -9,7 +9,7 @@ export const useTags = (fetcher: Fetcher) => {
   const tags = ref<Tag[]>([]); //支出标签
 
   //统一请求Tag
-  const ferchTags = async () => {
+  const fetchTags = async () => {
     const response = await fetcher(page.value);
     const { resources, pager } = response.data;
     tags.value.push(...resources);
@@ -20,11 +20,11 @@ export const useTags = (fetcher: Fetcher) => {
   };
 
   //初始化请求Tag
-  onMounted(ferchTags);
+  onMounted(fetchTags);
   return {
     page,
     hasMore,
     tags,
-    ferchTags,
+    fetchTags,
   };
 };

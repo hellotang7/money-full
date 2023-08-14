@@ -6,7 +6,6 @@ import { Form, FormItem } from "../../shared/Form";
 import { useRoute, useRouter } from "vue-router";
 import { http } from "../../shared/Http";
 import { onFormError } from "../../shared/onFormError";
-import {Resource, Tag} from '../../env';
 
 export const TagForm = defineComponent({
   props: {

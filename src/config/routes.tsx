@@ -1,3 +1,4 @@
+import { RouteRecordRaw } from "vue-router";
 import { Welcome } from "../views/Welcome";
 import { One } from "../components/welcome/One";
 import { Two } from "../components/welcome/Two";
@@ -17,15 +18,19 @@ import { SignInPage } from "../views/SignInPage";
 import { StatisticsPage } from "../views/StatisticsPage";
 import {ComingSoon} from '../views/ComingSoon';
 
+
+
 export const routes = [
   { path: "/", redirect: "/welcome" },
 
   {
-    path: "/welcome",
+    path: '/welcome',
     component: Welcome,
-    beforeEnter: (to, from, next) => {
-      localStorage.getItem("skipFeatures") === "yes" ? next("/items") : next();
+    beforeEnter: (to:any, from:any, next:any) => {
+      localStorage.getItem('skipFeatures') === 'yes' ? next('/items') : next()
     },
+
+
     children: [
       { path: "", redirect: "/welcome/1" },
       {
@@ -47,6 +52,10 @@ export const routes = [
         path: "4",
         name: "Welcome4",
         components: { main: Four, footer: FourActions },
+        beforeEnter: (to:any, from:any) => {
+          localStorage.setItem("skipFeatures", "yes");
+
+        },
       },
     ],
   },

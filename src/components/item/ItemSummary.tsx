@@ -24,28 +24,30 @@ export const ItemSummary = defineComponent({
         const items = ref<Item[]>([]);
         const hasMore = ref(false);
         const page = ref(0);
-        const itemsBalance = reactive({
-            expenses: 0, income: 0, balance: 0
-        });
-
 
         const fetchItems = async () => {
-            if (!props.startDate || !props.endDate) {
-                return;
-            }
-            const response = await http.get<Resource<Item>>('/items', {
+            if (!props.startDate || !props.endDate) {return;}
+            const response = await http.get<Resources<Item>>('/items', {
                 happen_after: props.startDate,
                 happen_before: props.endDate,
                 page: page.value + 1,
 
             },{_mock: 'itemIndex',_autoLoading:true});
-            const {resources, pager} = response.data;
-            items.value?.push(...resources);
-            hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count;
-            page.value += 1;
+            const { resources, pager } = response.data
+            items.value?.push(...resources)
+            hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
+            page.value += 1
         };
         onMounted(fetchItems);
-        const fetchItemBalance = async () => {
+
+        watch(()=>[props.startDate,props.endDate], ()=>{
+            items.value = []
+            hasMore.value = false
+            page.value = 0
+            fetchItems()
+        })
+
+        const fetchItemsBalance = async () => {
             if (!props.startDate || !props.endDate) {
                 return;
             }
@@ -57,18 +59,18 @@ export const ItemSummary = defineComponent({
             },{_mock: 'itemIndexBalance',_autoLoading:true});
             Object.assign(itemsBalance, response.data);
         };
-        onMounted(fetchItemBalance);
 
-        watch(() => [props.startDate, props.endDate], () => {
-            items.value = [];
-            hasMore.value = false;
-            page.value = 0;
+        const itemsBalance = reactive({
+            expenses: 0, income: 0, balance: 0
+        });
+
+        onMounted(fetchItemsBalance);
+        watch(()=>[props.startDate,props.endDate], ()=>{
             Object.assign(itemsBalance, {
                 expenses: 0, income: 0, balance: 0
-            });
-            fetchItems();
-            fetchItemBalance();
-        });
+            })
+            fetchItemsBalance()
+        })
 
 
         return () => (
@@ -102,7 +104,7 @@ export const ItemSummary = defineComponent({
                                         <span class={s.tag}>{item.tags![0].name}</span>
                                         <span class={s.amount}>￥<Money value={item.amount}/></span>
                                     </div>
-                                    <div class={s.time}><Datetime value={item.happened_at}/></div>
+                                    <div class={s.time}><Datetime value={item.happen_at}/></div>
                                 </div>
                             </li>
                         ))}

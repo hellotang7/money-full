@@ -15,7 +15,7 @@ export const Tags = defineComponent({
   },
   emits: ["update:selected"],
   setup: (props, context) => {
-    const { tags, hasMore, ferchTags } = useTags((page) => {
+    const { tags, hasMore, fetchTags } = useTags((page) => {
       return http.get<Resources<Tag>>("tags", {
         kind: props.kind,
         page: page + 1,
@@ -81,7 +81,7 @@ export const Tags = defineComponent({
 
           <div class={s.more}>
             {hasMore.value ? (
-              <Button onClick={ferchTags} class={s.loadMore}>
+              <Button onClick={fetchTags} class={s.loadMore}>
                 加载更多
               </Button>
             ) : (

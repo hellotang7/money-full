@@ -3,7 +3,6 @@ import {RouterLink, useRoute, useRouter} from 'vue-router';
 import s from './Overlay.module.scss';
 import {Icon} from './Icon';
 import {mePromise} from './me';
-import {User} from '../env';
 import {Dialog} from 'vant';
 
 export const Overlay = defineComponent({

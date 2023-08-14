@@ -2,7 +2,6 @@
 
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse,} from "axios";
 import {mockItemCreate, mockItemIndex, mockItemIndexBalance, mockItemSummary, mockSession, mockTagEdit, mockTagIndex, mocktagShow,} from '../mock/mock';
-import {onMounted} from 'vue';
 import {Toast} from 'vant';
 // import el from "@faker-js/faker/locales/el";
 

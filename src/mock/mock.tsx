@@ -13,37 +13,34 @@ const createId = () => {
     return id;
 };
 export const mockTagIndex: Mock = (config) => {
-    const {kind, page} = config.params;
-    const per_page = 24;
-    const count = 40;
-
+    const { kind, page } = config.params
+    const per_page = 25
+    const count = 26
     const createPaper = (page = 1) => ({
         page,
         per_page,
-        count,
-    });
-
+        count
+    })
     const createTag = (n = 1, attrs?: any) =>
-        Array.from({length: n}).map(() => ({
+        Array.from({ length: n }).map(() => ({
             id: createId(),
             name: faker.lorem.word(),
             sign: faker.internet.emoji(),
             kind: config.params.kind,
-            ...attrs,
-        }));
-
-    const createBody = (n: number, attrs?: any) => ({
+            ...attrs
+        }))
+    const createBody = (n = 1, attrs?: any) => ({
         resources: createTag(n),
-        pager: createPaper(page),
-    });
+        pager: createPaper(page)
+    })
 
     if (kind === 'expenses' && (!page || page === 1)) {
         return [200, createBody(24)];
     } else if (kind === 'expenses' && page === 2) {
         return [200, createBody(16)];
-    } else if ((kind === 'income' && !page) || page === 1) {
+    } else if (kind === 'income' && (!page || page === 1)) {
         return [200, createBody(24)];
-    } else if (kind === 'income' && page === 2) {
+    } else{
         return [200, createBody(16)];
     }
 };
@@ -150,49 +147,55 @@ export const mockSession: Mock = (config) => {
     ];
 };
 
-export const mockItemSummary: Mock = config => {
+export const mockItemSummary: Mock = (config)=> {
     const {group_by,kind} = config.params
     if (group_by === 'happen_at' && kind === 'expenses') {
-        return [200, {
-            groups: [
-                {'happen_at': '2023-08-17T00:00:00.000+0800', 'amount': 100},
-                {'happen_at': '2023-08-19T00:00:00.000+0800', 'amount': 350},
-                {'happen_at': '2023-08-28T00:00:00.000+0800', 'amount': 150},
-            ],
-            summary: 600
-        }];
+        return [
+            200,
+            {
+                groups: [
+                    { happen_at: '2022-07-18T00:00:00.000+0800', amount: 100 },
+                    { happen_at: '2022-07-22T00:00:00.000+0800', amount: 300 },
+                    { happen_at: '2022-07-29T00:00:00.000+0800', amount: 200 }
+                ],
+                summary: 600
+            }
+        ]
     } else if (group_by === 'happen_at' && kind === 'income') {
-        return [200, {
-            groups: [
-                {'happen_at': '2023-08-13T00:00:00.000+0800', 'amount': 200},
-                {'happen_at': '2023-08-19T00:00:00.000+0800', 'amount': 350},
-                {'happen_at': '2023-08-25T00:00:00.000+0800', 'amount': 50},
-            ],
-            summary: 600
-        }];
-    }else if (group_by === 'tag_id' && kind === 'expenses') {
         return [
             200,
             {
                 groups: [
-                    {tag_id: 1, tag: {id: 1, name: '交通',sign:faker.internet.emoji()}, amount: 300},
-                    {tag_id: 2, tag: {id: 2, name: '吃饭',sign:faker.internet.emoji()}, amount: 100},
-                    {tag_id: 3, tag: {id: 3, name: '购物',sign:faker.internet.emoji()}, amount: 200},
+                    { happen_at: '2022-07-08T00:00:00.000+0800', amount: 100 },
+                    { happen_at: '2022-07-12T00:00:00.000+0800', amount: 300 },
+                    { happen_at: '2022-07-19T00:00:00.000+0800', amount: 200 }
                 ],
-              summary: 600
+                summary: 600
             }
-        ];
-    }else if (group_by === 'tag_id' && kind === 'income') {
+        ]
+    } else if (group_by === 'tag_id' && kind === 'expenses') {
         return [
             200,
             {
                 groups: [
-                    {tag_id: 1, tag: {id: 1, name: '兼职',sign:faker.internet.emoji()}, amount: 200},
-                    {tag_id: 2, tag: {id: 2, name: '诈骗',sign:faker.internet.emoji()}, amount: 100},
-                    {tag_id: 3, tag: {id: 3, name: '赌博',sign:faker.internet.emoji()}, amount: 300},
+                    { tag_id: 1, tag: { id: 1, name: '交通', sign: faker.internet.emoji() }, amount: 100 },
+                    { tag_id: 2, tag: { id: 2, name: '吃饭', sign: faker.internet.emoji() }, amount: 300 },
+                    { tag_id: 3, tag: { id: 3, name: '购物', sign: faker.internet.emoji() }, amount: 200 }
                 ],
-              summary: 600
+                summary: 600
             }
-        ];
+        ]
+    } else {
+        return [
+            200,
+            {
+                groups: [
+                    { tag_id: 1, tag: { id: 1, name: '交通', sign: faker.internet.emoji() }, amount: 400 },
+                    { tag_id: 2, tag: { id: 2, name: '吃饭', sign: faker.internet.emoji() }, amount: 300 },
+                    { tag_id: 3, tag: { id: 3, name: '购物', sign: faker.internet.emoji() }, amount: 200 }
+                ],
+                summary: 900
+            }
+        ]
     }
 };

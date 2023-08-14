@@ -6,23 +6,22 @@ import {PieChart} from './PieChart';
 import {Bars} from './Bars';
 import {http} from '../../shared/Http';
 import {Time} from '../../shared/time';
-import {Tag} from '../../env';
 
 const DAY = 24 * 3600 * 1000;
 type Data1Item = { happen_at: string, amount: number }
-type Data2Item = { tag_id: number, amount: number }
+type Data2Item = { tag_id: number,tag:Tag, amount: number }
 type Data1 = Data1Item[]
 type Data2 = Data2Item[]
 export const Charts = defineComponent({
     props: {
         startDate: {
             type: String as PropType<string>,
-            required: false,
+            required: false
         },
         endDate: {
             type: String as PropType<string>,
-            required: false,
-        },
+            required: false
+        }
     },
     setup: (props, context) => {
         const kind = ref('expenses');
@@ -43,8 +42,6 @@ export const Charts = defineComponent({
         });
 
 
-        watch(()=>kind.value, ()=>fetchData1())
-        watch(()=>kind.value, ()=>fetchData2())
 
         //data1
         const fetchData1 = async ()=>{
@@ -59,18 +56,21 @@ export const Charts = defineComponent({
 
         }
         onMounted(fetchData1);
+        watch(()=>kind.value, ()=>fetchData1())
 
         //data2
         const fetchData2 = async ()=>{
-            const response = await http.get<{ groups: Data2; summary: number }>('/items/summary',{
-                happen_after:props.startDate,
-                happen_before:props.endDate,
-                kind:kind.value,
-                group_by:'tag_id',
-
-            },{ _mock:'itemSummary'})
+            const response = await http.get<{ groups: Data2; summary: number }>('/items/summary', {
+                happen_after: props.startDate,
+                happen_before: props.endDate,
+                kind: kind.value,
+                group_by: 'tag_id',
+            }, {
+                _mock: 'itemSummary'
+            })
             data2.value = response.data.groups
         }
+
         const data2 = ref<Data2>([])
         const betterData2 = computed<{ value: number, name: string }[]>(() =>
             data2.value.map(item => ({
@@ -79,6 +79,7 @@ export const Charts = defineComponent({
                 }))
         );
         onMounted(fetchData2)
+        watch(()=>kind.value, ()=>fetchData2())
 
 
         //data3
@@ -95,16 +96,16 @@ export const Charts = defineComponent({
                 <FormItem
                     label="类型"
                     type="select"
-                    v-model={kind.value}
                     options={[
-                        {value: 'expenses', text: '支出'},
-                        {value: 'income', text: '收入'},
+                        { value: 'expenses', text: '支出' },
+                        { value: 'income', text: '收入' }
                     ]}
+                    v-model={kind.value}
                 />
-                <LineChart data={betterData1.value}/>
-                <PieChart data={betterData2.value}/>
-                <Bars data={betterData3.value}/>
+                <LineChart data={betterData1.value} />
+                <PieChart data={betterData2.value} />
+                <Bars data={betterData3.value} />
             </div>
-        );
-    },
-});
+        )
+
+}})
