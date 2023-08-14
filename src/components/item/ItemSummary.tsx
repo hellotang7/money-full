@@ -5,6 +5,9 @@ import {Button} from '../../shared/Button';
 import {http} from '../../shared/Http';
 import {Money} from '../../shared/Money';
 import {Datetime} from '../../shared/Datetime';
+import {Center} from '../../shared/Center';
+import {Icon} from '../../shared/Icon';
+import {RouterLink} from 'vue-router';
 
 export const ItemSummary = defineComponent({
     props: {
@@ -70,7 +73,10 @@ export const ItemSummary = defineComponent({
 
         return () => (
             <div class={s.wrapper}>
-                {items.value ? (<>
+                {
+                    (items.value && items.value.length > 0)
+                    ?
+                    (<>
                     <ul class={s.total}>
                         <li>
                             <span>收入</span>
@@ -102,9 +108,22 @@ export const ItemSummary = defineComponent({
                         ))}
                     </ol>
                     <div class={s.more}>
-                        {hasMore.value ? <Button onClick={fetchItems}>加载更多</Button> : <span>没有更多了</span>}
+                        {hasMore.value
+                            ? <Button onClick={fetchItems}>加载更多</Button>
+                            : <span>没有更多了</span>}
                     </div>
-                </>) : <div>记录为空</div>}
+                </>)
+                    :
+                    <> <Center class={s.pig_wrapper}>
+                           <Icon name="pig" class={s.pig}/>
+                         </Center>
+                        <div class={s.button_wrapper}>
+                            <RouterLink to="/items/create">
+                                <Button class={s.button}>开始记账</Button>
+                            </RouterLink>
+                        </div>
+                    </>
+                }
                 <FloartButton iconName="add"/>
             </div>
         );

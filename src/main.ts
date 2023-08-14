@@ -15,8 +15,7 @@ router.beforeEach((to, from) => {
   if (
     to.path === "/" ||
     to.path.startsWith("/welcome") ||
-    to.path.startsWith("/sign_in") ||
-    to.path === "/start"
+    to.path.startsWith("/sign_in")
   ) {
     return true;
   } else {

@@ -1,6 +1,5 @@
 import { defineComponent, ref } from "vue";
 import { Button } from "../shared/Button";
-import s from "./StartPage.module.scss";
 import { FloartButton } from "../shared/FloartButton";
 import { Center } from "../shared/Center";
 import { Icon } from "../shared/Icon";

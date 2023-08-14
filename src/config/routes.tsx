@@ -7,7 +7,6 @@ import { FourActions } from "../components/welcome/FourActions";
 import { OneActions } from "../components/welcome/OneActions";
 import { ThreeActions } from "../components/welcome/ThreeActions";
 import { TwoActions } from "../components/welcome/TwoActions";
-import { StartPage } from "../views/StartPage";
 import { ItemPage } from "../views/ItemPage";
 import { ItemList } from "../components/item/ItemList";
 import { ItemCreate } from "../components/item/ItemCreate";
@@ -16,7 +15,6 @@ import { TagCreate } from "../components/tags/TagCreate";
 import { TagEdit } from "../components/tags/TagEdit";
 import { SignInPage } from "../views/SignInPage";
 import { StatisticsPage } from "../views/StatisticsPage";
-import { http } from "../shared/Http";
 
 export const routes = [
   { path: "/", redirect: "/welcome" },
@@ -25,7 +23,7 @@ export const routes = [
     path: "/welcome",
     component: Welcome,
     beforeEnter: (to, from, next) => {
-      localStorage.getItem("skipFeatures") === "yes" ? next("/start") : next();
+      localStorage.getItem("skipFeatures") === "yes" ? next("/items") : next();
     },
     children: [
       { path: "", redirect: "/welcome/1" },
@@ -51,7 +49,7 @@ export const routes = [
       },
     ],
   },
-  { path: "/start", component: StartPage },
+
   {
     path: "/items",
     component: ItemPage,
