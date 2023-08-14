@@ -21,7 +21,7 @@ export const ItemCreate = defineComponent({
       kind: "支出",
       tag_id: [],
       amount: 0,
-      happen_at: new Date().toISOString(),
+      happen_at: new Date() ,
     });
     const router = useRouter();
     const onError = (error: AxiosError<ResourceError>) => {

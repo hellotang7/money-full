@@ -15,6 +15,7 @@ import { TagCreate } from "../components/tags/TagCreate";
 import { TagEdit } from "../components/tags/TagEdit";
 import { SignInPage } from "../views/SignInPage";
 import { StatisticsPage } from "../views/StatisticsPage";
+import {ComingSoon} from '../views/ComingSoon';
 
 export const routes = [
   { path: "/", redirect: "/welcome" },
@@ -69,4 +70,5 @@ export const routes = [
   },
   { path: "/sign_in", component: SignInPage },
   { path: "/statistics", component: StatisticsPage },
+  {path: '/export', component: ComingSoon},
 ];

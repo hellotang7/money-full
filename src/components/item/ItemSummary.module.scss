@@ -77,19 +77,22 @@
 
 .more {
     padding: 16px;
-    //width: 100vw;
     text-align: center;
-    >Button{
-        //width: 100%;
-    }
 }
 
 
 .button {
+
     width: 100%;
 
+
     &_wrapper {
-        padding: 16px;
+        padding: 26px;
+        .text{
+            text-align: center;
+            padding-bottom: 20px;
+            color: #cbc4c4;
+        }
     }
 }
 

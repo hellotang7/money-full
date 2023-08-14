@@ -112,19 +112,21 @@ export const ItemSummary = defineComponent({
                             ? <Button onClick={fetchItems}>加载更多</Button>
                             : <span>没有更多了</span>}
                     </div>
+                        <FloartButton iconName="add"/>
                 </>)
                     :
                     <> <Center class={s.pig_wrapper}>
                            <Icon name="pig" class={s.pig}/>
                          </Center>
                         <div class={s.button_wrapper}>
+                            <p class={s.text}>没有发现账单哦，请试着记一笔~</p>
                             <RouterLink to="/items/create">
-                                <Button class={s.button}>开始记账</Button>
+                                <Button class={s.button}>记一笔</Button>
                             </RouterLink>
                         </div>
                     </>
                 }
-                <FloartButton iconName="add"/>
+
             </div>
         );
     },

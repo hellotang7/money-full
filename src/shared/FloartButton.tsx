@@ -16,9 +16,9 @@ export const FloartButton = defineComponent({
   setup: (props, context) => {
     return () => (
         <RouterLink to={'/items/create'}>
-      <div class={s.floatButton}>
-        <Icon name={props.iconName} class={s.icon} />
-      </div>
+          <div class={s.floatButton}>
+            <Icon name={props.iconName} class={s.icon}/>
+          </div>
         </RouterLink>
     );
   },

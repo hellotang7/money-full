@@ -52,6 +52,12 @@ export const Overlay = defineComponent({
                     <nav>
                         <ul class={s.action_list}>
                             <li>
+                                <RouterLink to="/items" class={s.action}>
+                                    <Icon name="mangosteen" class={s.icon}/>
+                                    <span>首页</span>
+                                </RouterLink>
+                            </li>
+                            <li>
                                 <RouterLink to="/statistics" class={s.action}>
                                     <Icon name="charts" class={s.icon}/>
                                     <span>统计图表</span>
@@ -59,22 +65,12 @@ export const Overlay = defineComponent({
                             </li>
                             <li>
                                 <RouterLink to="/export" class={s.action}>
-                                    <Icon name="export"></Icon>
+                                    <Icon name="export" class={s.icon}></Icon>
                                     <span>导出数据</span>
                                 </RouterLink>
                             </li>
-                            <li>
-                                <RouterLink to="/fen" class={s.action}>
-                                    <Icon name="fen"></Icon>
-                                    <span>自定义分类</span>
-                                </RouterLink>
-                            </li>
-                            <li>
-                                <RouterLink to="/notify" class={s.action}>
-                                    <Icon name="notify"></Icon>
-                                    <span>记账提醒</span>
-                                </RouterLink>
-                            </li>
+
+
                         </ul>
                     </nav>
                 </div>
@@ -91,7 +87,7 @@ export const OverlayIcon = defineComponent({
         };
         return () => (
             <>
-                <Icon name="menu" class={s.icon} onClick={onClickMenu}/>
+                <Icon name="menu" class={s.iconMenu} onClick={onClickMenu}/>
                 {overlayVisble.value && (
                     <Overlay onClose={() => (overlayVisble.value = false)}/>
                 )}
