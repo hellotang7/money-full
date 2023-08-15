@@ -6,6 +6,7 @@ import { createRouter } from 'vue-router'
 import {history} from './shared/histouy';
 import '@svgstore';
 import { createPinia } from 'pinia';
+import {Dialog} from 'vant';
 
 
 const router = createRouter({ history, routes })
@@ -39,6 +40,11 @@ router.beforeEach((to, from) => {
   }
   return meStore.mePromise!.then(
       () => true,
-      () => '/sign_in?return_to=' + to.path
-  )
+      async () => {
+        await Dialog.confirm({
+          message: '请先登录',
+        });
+        return '/sign_in?return_to=' + from.path;
+      }
+  );
 })
