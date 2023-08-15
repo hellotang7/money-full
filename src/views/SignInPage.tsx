@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive, ref } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import s from "./SignInPage.module.scss";
 import { MainLayout } from "../layouts/MainLayout";
 import { Icon } from "../shared/Icon";
@@ -8,10 +8,11 @@ import { hasError, validate } from "../shared/validate";
 import { http } from "../shared/Http";
 import { useBool } from "../hooks/useBool";
 import { useRouter, useRoute } from "vue-router";
-import { refreshMe } from "../shared/me";
 import { BackIcon } from "../shared/BackIcon";
+import {useMeStore} from '../stores/useMeStore';
 export const SignInPage = defineComponent({
   setup: (props, context) => {
+    const meStore = useMeStore()
     const refValidationCode = ref<any>();
     const router = useRouter();
     const route = useRoute();
@@ -51,6 +52,7 @@ export const SignInPage = defineComponent({
         ])
       );
 
+
       if (!hasError(errors)) {
         const response = await http
             .post<{ jwt: string }>('/session', formData, {_autoLoading: true})
@@ -66,7 +68,7 @@ export const SignInPage = defineComponent({
         localStorage.setItem("jwt", response.data.jwt);
 
         const returnTo = route.query.return_to?.toString();
-        refreshMe();
+        meStore.refreshMe();
         router.push(returnTo || "/");
       }
     };

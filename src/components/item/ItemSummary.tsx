@@ -8,6 +8,7 @@ import {Datetime} from '../../shared/Datetime';
 import {Center} from '../../shared/Center';
 import {Icon} from '../../shared/Icon';
 import {RouterLink} from 'vue-router';
+import {Dialog,SwipeCell} from 'vant';
 
 export const ItemSummary = defineComponent({
     props: {
@@ -73,6 +74,45 @@ export const ItemSummary = defineComponent({
         })
 
 
+
+
+        const timer = ref<number>();
+        const currentTag = ref<HTMLDivElement>();
+        const onLongPress =  (id: number) => {
+            Dialog.confirm({
+                message: "删除后无法恢复，是否删除？",
+            }).then( async ()=>{
+                console.log(111);
+                await http.delete(`/items/${id}`, {}, {})
+                // fetchItems()
+            })
+
+
+        }
+
+        const onTouchStart = (e: TouchEvent, item: Item) => {
+            currentTag.value = e.currentTarget as HTMLDivElement;
+            timer.value = setTimeout(() => {
+                onLongPress(item.id);
+            }, 500);
+        };
+        const onTouchEnd = (e: TouchEvent) => {
+            clearTimeout(timer.value);
+        };
+
+        const onTouchMove = (e: TouchEvent) => {
+            const pointedElement = document.elementFromPoint(
+                e.touches[0].clientX,
+                e.touches[0].clientY
+            );
+            if (
+                currentTag.value?.contains(pointedElement) === false &&
+                currentTag.value !== pointedElement
+            ) {
+                clearTimeout(timer.value);
+            }
+        };
+
         return () => (
             <div class={s.wrapper}>
                 {
@@ -95,7 +135,11 @@ export const ItemSummary = defineComponent({
                     </ul>
                     <ol class={s.list}>
                         {items.value.map((item) => (
-                            <li>
+
+
+                            <li onTouchend={onTouchEnd} onTouchmove={onTouchMove}  onTouchstart={(e) => onTouchStart(e, item)}>
+
+
                                 <div class={s.sign}>
                                     <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
                                 </div>
