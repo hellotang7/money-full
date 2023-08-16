@@ -42,7 +42,7 @@ export const TagEdit = defineComponent({
                   class={s.removeTagsAndItems}
                   onClick={() => onDelete({ withItems: true })}
                 >
-                  删除标签和记账
+                  删除标签（对应记账也会被删除）
                 </Button>
               </div>
             </>

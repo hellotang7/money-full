@@ -1,8 +1,16 @@
-// import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse,} from "axios";
-import {mockItemCreate, mockItemIndex, mockItemIndexBalance, mockItemSummary, mockSession, mockTagEdit, mockTagIndex, mocktagShow,} from '../mock/mock';
 import {Toast} from 'vant';
+import {
+  mockItemCreate,
+  mockItemIndex,
+  mockItemIndexBalance,
+  mockItemSummary,
+  mockSession,
+  mockTagEdit,
+  mockTagIndex,
+  mocktagShow
+} from '../mock/mock';
 // import el from "@faker-js/faker/locales/el";
 
 type GetConfig = Omit<AxiosRequestConfig, "params" | "url" | "method">;
@@ -37,44 +45,47 @@ export class Http {
 }
 
 const mock = (response: AxiosResponse) => {
-  if (
-    location.hostname !== "localhost" &&
-    location.hostname !== "127.0.0.1" &&
-    location.hostname !== "192.168.3.57"
-  ) {
-    return true;
+  if (true || location.hostname !== 'localhost'
+      && location.hostname !== '127.0.0.1'
+      && location.hostname !== '192.168.3.57') { return false }
+  switch (response.config?._mock) {
+    case "tagIndex":
+      [response.status, response.data] = mockTagIndex(response.config);
+      return true;
+    case "itemCreate":
+      [response.status, response.data] = mockItemCreate(response.config);
+      return true;
+    case "tagEdit":
+      [response.status, response.data] = mockTagEdit(response.config);
+      return true;
+
+    case "itemIndex":
+      [response.status, response.data] = mockItemIndex(response.config);
+      return true;
+    case 'itemIndexBalance':
+      [response.status, response.data] = mockItemIndexBalance(response.config);
+      return true;
+    case "itemSummary":
+      [response.status, response.data] = mockItemSummary(response.config);
+      return true;
+      case "session":
+      [response.status, response.data] = mockSession(response.config);
+      return true;
+    case "tagShow":
+      [response.status, response.data] = mocktagShow(response.config);
+      return true;
   }
-  // switch (response.config?._mock) {
-  //   case "tagIndex":
-  //     [response.status, response.data] = mockTagIndex(response.config);
-  //     return true;
-  //   case "itemCreate":
-  //     [response.status, response.data] = mockItemCreate(response.config);
-  //     return true;
-  //   case "tagEdit":
-  //     [response.status, response.data] = mockTagEdit(response.config);
-  //     return true;
-  //
-  //   case "itemIndex":
-  //     [response.status, response.data] = mockItemIndex(response.config);
-  //     return true;
-  //   case 'itemIndexBalance':
-  //     [response.status, response.data] = mockItemIndexBalance(response.config);
-  //     return true;
-  //   case "itemSummary":
-  //     [response.status, response.data] = mockItemSummary(response.config);
-  //     return true;
-  //     case "session":
-  //     [response.status, response.data] = mockSession(response.config);
-  //     return true;
-  //   case "tagShow":
-  //     [response.status, response.data] = mocktagShow(response.config);
-  //     return true;
-  // }
   return false;
 };
 
-export const http = new Http("/api/v1");
+function isDev(){
+  if (
+      location.hostname !== "localhost" &&
+      location.hostname !== "127.0.0.1" &&
+      location.hostname !== "192.168.3.57") {return false;}
+  return true
+}
+export const http = new Http(isDev() ?  'api/v1' : 'http://121.196.236.94:3000/api/v1');
 
 //请求拦截  如果本地jwt存在，则将其添加到请求头中的Authorization字段中
 http.instance.interceptors.request.use((config) => {
