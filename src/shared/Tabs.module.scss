@@ -1,35 +1,33 @@
 .tabs {
     position: relative;
 
+
     &_nav {
+padding: 2px;
         display: flex;
         justify-content: space-between;
         text-align: center;
-        color: var(--navbar-text);
-        position: sticky;
+
+        //position: sticky;
         z-index: 1;
         top: 0;
+        margin: 0 16px;
         background: var(--navbar-bg-end);
-
+        border-radius: var( --button-radius);
+        color: rgba(255, 97, 97, 1);
+        font-weight: bold;
         >li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-grow: 1;
             flex-shrink: 0;
-            padding: 12px 0;
+            padding: 8px 0;
 
             &.selected {
-                position: relative;
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    display: block;
-                    bottom: 0;
-                    left: 0;
-                    height: 4px;
-                    width: 100%;
-                    background: var(--tabs-indicator-bg);
-                    // transition: all 250ms;
-                }
+                color: black;
+                background: var(--tabs-indicator-bg);
+                border-radius: var( --button-radius);
             }
         }
     }

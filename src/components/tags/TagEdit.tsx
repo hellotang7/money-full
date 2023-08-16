@@ -29,10 +29,10 @@ export const TagEdit = defineComponent({
       router.back();
     };
     return () => (
-      <MainLayout>
+      <MainLayout disabled={false}>
         {{
           title: () => "编辑标签",
-          icon: () => <BackIcon />,
+          icon: () => <BackIcon class={s.backIcon}/>,
           default: () => (
             <>
               <TagForm id={numberId} />
@@ -42,7 +42,7 @@ export const TagEdit = defineComponent({
                   class={s.removeTagsAndItems}
                   onClick={() => onDelete({ withItems: true })}
                 >
-                  删除标签（对应记账也会被删除）
+                  删除标签
                 </Button>
               </div>
             </>

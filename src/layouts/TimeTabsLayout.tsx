@@ -2,7 +2,6 @@ import { defineComponent, PropType, reactive, ref } from "vue";
 import s from "./TimeTabsLayout.module.scss";
 import { Time } from "../shared/time";
 import { MainLayout } from "./MainLayout";
-import { OverlayIcon } from "../shared/Overlay";
 import { Tab, Tabs } from "../shared/Tabs";
 import { Overlay } from "vant";
 import { Form, FormItem } from "../shared/Form";
@@ -79,12 +78,13 @@ export const TimeTabsLayout = defineComponent({
       <MainLayout class={s.wrapper}>
         {{
           title: () => "山竹记账",
-          icon: () => <OverlayIcon />,
           default: () => (
+
               <>
+
                 {props.hideThisYear
                     ?
-                    <Tabs
+                    <Tabs class={s.Tabs}
                         v-model:selected={refSelected.value}
                         onUpdate:selected={onSelect}
                         rerenderOnSelect={props.rerenderOnSwitchTab}
@@ -102,7 +102,7 @@ export const TimeTabsLayout = defineComponent({
                         />
                       </Tab>
 
-                      <Tab value="上月" name="自定义时间">
+                      <Tab value="自定义时间" name="自定义时间">
                         <props.component
                             startDate={customTime.start}
                             endDate={customTime.end}
@@ -111,6 +111,7 @@ export const TimeTabsLayout = defineComponent({
                     </Tabs>
                     :
                     <Tabs
+                        class={s.Tabs}
                         v-model:selected={refSelected.value}
                         onUpdate:selected={onSelect}
                         rerenderOnSelect={props.rerenderOnSwitchTab}

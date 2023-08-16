@@ -62,10 +62,10 @@ export const ItemCreate = defineComponent({
 
     };
     return () => (
-      <MainLayout class={s.layout}>
+      <MainLayout class={s.layout} disabled={false}>
         {{
           title: () => "记一笔",
-          icon: () => <BackIcon />,
+          icon: () => <BackIcon class={s.backIcon}/>,
           default: () => (
             <>
               <div class={s.wrapper}>

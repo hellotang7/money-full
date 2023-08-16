@@ -1,0 +1,44 @@
+
+.action_list {
+
+  width: 97%;
+  background-color: #fff;
+  z-index: 10;
+  position: fixed;
+  bottom: 1.52vh;
+  height: 11.38vh;
+  border-radius: 3rem;
+  box-shadow: var(--black-shadow);
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto auto auto auto auto;
+  justify-items: center;
+
+  .action {
+    &:nth-child(3) {
+      color: #fff;
+      background: var(--total--expenses--bg);
+      width: 8.2vh;
+      height: 8.2vh;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &.activeClass {
+      color: rgba(254, 166, 65, 1);
+      background: red;
+    }
+
+  }
+
+
+}
+
+
+svg.icon {
+  width: 30px;
+  height: 30px;
+  color: #D5D8DE;
+}

@@ -26,23 +26,23 @@ export const Charts = defineComponent({
     setup: (props, context) => {
         const kind = ref('expenses');
         const data1 = ref<Data1>([]);
+
         const betterData1 = computed<[string, number][]>(() => {
-            if (!props.startDate || !props.endDate) return [];
-            const diff = new Date(props.endDate).getTime() - new Date(props.startDate).getTime();
-            const n = diff / DAY + 1;
-            return Array.from({length: n}).map((_, i) => {
-                const time = new Time(props.startDate + 'T00:00:00.000+0800').add(i, 'day').getTimestamp();
-                const item = data1.value[0];
-                const amount = (item && new Date(item.happen_at+'T00:00:00.000+0800').getTime() === time)
-                    ? data1.value.shift()!.amount
-                    : 0;
-                return [new Date(time).toISOString(), amount];
-            });
-
-        });
-
-
-
+            if (!props.startDate || !props.endDate) {
+                return []
+            }
+            const diff = new Date(props.endDate).getTime() - new Date(props.startDate).getTime()
+            const n = diff / DAY + 1
+            
+            console.log(n);
+            return Array.from({ length: n }).map((_, i) => {
+                const time = new Time(props.startDate + 'T00:00:00.000+0800').add(i, 'day').getTimestamp()
+                const item = data1.value[0]
+                const amount = item && new Date(item.happen_at +'T00:00:00.000+0800').getTime() === time ? data1.value.shift()!.amount : 0
+                return [new Date(time).toISOString(), amount]
+            })
+        })
+        console.log(betterData1);
         //data1
         const fetchData1 = async ()=>{
             const response = await http.get<{ groups: Data1, summary: number }>('/items/summary', {
@@ -53,6 +53,7 @@ export const Charts = defineComponent({
 
             },{ _mock: 'itemSummary',_autoLoading:true});
             data1.value = response.data.groups;
+            console.log(data1.value);
 
         }
         onMounted(fetchData1);

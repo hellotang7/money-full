@@ -1,0 +1,42 @@
+.overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .userIcon {
+    font-size: 5.28vh;
+    height: 11.15vh;
+    width: 11.15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6vh;
+
+    background-color: #D5D8DE;
+    border: 0.29vh solid white;
+    color: #fff;
+    box-shadow: 2px 4px 11px #00000040;
+    margin-top: 12vh;
+
+    .icon {
+     color: white;
+    }
+  }
+
+  .userCurrent {
+
+    text-align: center;
+
+    margin-top: 4vh;
+>p{
+  margin-top: 2vh;
+
+}
+    .button {
+      margin-top: 32vh;
+      width: calc(100vw - 128px);
+    }
+  }
+}

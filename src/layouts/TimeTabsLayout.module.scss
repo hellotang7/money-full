@@ -1,37 +1,38 @@
-// .wrapper {}
 
 .overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--overlay-mask-bg);
-    // z-index: var(--van-overlay-z-index);
 
-    &_inner {
-        background: var(--bg);
-        width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--overlay-mask-bg);
 
-        >header {
-            background: var(--main);
-            padding: 12px 16px;
-            color: var(--dialog-header-text);
-        }
+  // z-index: var(--van-overlay-z-index);
 
-        // >main {}
+  &_inner {
+    border-radius: var(--button-radius);
+    background: white;
+
+    width: 80vw;
+
+    > header {
+      padding: 16px 16px 0;
+      color: black;
+      font-weight: bold;
     }
+
+    // >main {}
+  }
 }
 
 .actions {
-    text-align: right;
+  text-align: right;
 
-    >button {
-        border: none;
-        background: transparent;
-        padding: 8px 16px;
-        // & + &{
+  > button {
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
 
-        // }
 
-    }
+  }
 
 }

@@ -1,13 +1,10 @@
 import {defineComponent, onMounted, PropType, reactive, ref, watch} from 'vue';
 import s from './ItemSummary.module.scss';
-import {FloartButton} from '../../shared/FloartButton';
 import {Button} from '../../shared/Button';
 import {http} from '../../shared/Http';
 import {Money} from '../../shared/Money';
 import {Datetime} from '../../shared/Datetime';
-import {Center} from '../../shared/Center';
-import {Icon} from '../../shared/Icon';
-import {RouterLink} from 'vue-router';
+
 import {Dialog,SwipeCell} from 'vant';
 import {useAfterMe} from '../../hooks/useAfterMe';
 import {useItemStore} from '../../stores/useItemStore';
@@ -125,60 +122,61 @@ export const ItemSummary = defineComponent({
                     (<>
                     <ul class={s.total}>
                         <li>
-                            <span>支出</span>
-                            <span>-{itemsBalance.expenses}</span>
-                        </li>
-                        <li>
                             <span>收入</span>
                             <span>+{itemsBalance.income}</span>
+                        </li>
+                        <li>
+                            <span>支出</span>
+                            <span>-{itemsBalance.expenses}</span>
                         </li>
                         <li>
                             <span>净收入</span>
                             <span>{itemsBalance.balance}</span>
                         </li>
                     </ul>
-                    <ol class={s.list}>
-                        {itemStore.items.map((item) => (
+                        <div class={s.statistics_wrapper}>
+                            <div class={s.statistics}></div>
+                            <ol class={s.list}>
+                                {itemStore.items.map((item) => (
 
 
-                            <li onTouchend={onTouchEnd} onTouchmove={onTouchMove}  onTouchstart={(e) => onTouchStart(e, item)}>
+                                    <li onTouchend={onTouchEnd} onTouchmove={onTouchMove}
+                                        onTouchstart={(e) => onTouchStart(e, item)}>
 
 
-                                <div class={s.sign}>
-                                    <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
-                                </div>
-                                <div class={s.text}>
-                                    <div class={s.tagAndAmount}>
+                                        <div class={s.sign}>
+                                            <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
+                                        </div>
+                                        <div class={s.text}>
+                                            <div class={s.tagAndAmount}>
                                         <span
                                             class={s.tag}>{item.tags && item.tags.length > 0 ? item.tags[0].name : '未分类'}</span>
-                                        {item.kind === 'expenses'
-                                            ?<span class={s.amount}>- <Money value={item.amount}/></span>
-                                            :<span class={s.amountIncome}>+ <Money value={item.amount}/></span>}
+                                                {item.kind === 'expenses'
+                                                    ? <span class={s.amountExpenses}>- <Money value={item.amount}/></span>
+                                                    :
+                                                    <span class={s.amountIncome}>+ <Money value={item.amount}/></span>}
 
-                                    </div>
-                                    <div class={s.time}><Datetime value={item.happen_at}/></div>
+                                            </div>
+                                            <div class={s.time}><Datetime value={item.happen_at}/></div>
+                                        </div>
+                                    </li>
+                                ))}
+                                <div class={s.more}>
+                                    {itemStore.hasMore
+                                        ? <Button
+                                            onClick={() => itemStore.fetchNextPage(props.startDate, props.endDate)}>加载更多</Button>
+                                        : <span>没有更多了</span>}
                                 </div>
-                            </li>
-                        ))}
-                    </ol>
-                    <div class={s.more}>
-                        {itemStore.hasMore
-                            ?      <Button onClick={() => itemStore.fetchNextPage(props.startDate, props.endDate)}>加载更多</Button>
-                            : <span>没有更多了</span>}
-                    </div>
-                        <FloartButton iconName="add"/>
+                            </ol>
+                        </div>
+
+
                 </>)
                     :
-                    <> <Center class={s.pig_wrapper}>
-                           <Icon name="pig" class={s.pig}/>
-                         </Center>
-                        <div class={s.button_wrapper}>
-                            <p class={s.text}>没有发现账单哦，请试着记一笔~</p>
-                            <RouterLink to="/items/create">
-                                <Button class={s.button}>记一笔</Button>
-                            </RouterLink>
-                        </div>
-                    </>
+
+                            <p class={s.msg_text}>没有发现账单哦，请试着记一笔~</p>
+
+
                 }
 
             </div>

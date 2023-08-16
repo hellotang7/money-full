@@ -23,7 +23,7 @@ meStore.fetchMe()
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
   '/': 'exact',
-  '/items': 'exact',
+  '/start': 'exact',
   '/welcome': 'startsWith',
   '/sign_in': 'startsWith',
 }
@@ -41,9 +41,7 @@ router.beforeEach((to, from) => {
   return meStore.mePromise!.then(
       () => true,
       async () => {
-        await Dialog.confirm({
-          message: '请先登录',
-        });
+
         return '/sign_in?return_to=' + from.path;
       }
   );

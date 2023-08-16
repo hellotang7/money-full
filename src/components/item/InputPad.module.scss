@@ -32,14 +32,14 @@
 
     .buttons {
         display: grid;
-        grid-template-areas: 
+        grid-template-areas:
         "n1 n2 n3 d"
         "n4 n5 n6 d"
         "n7 n8 n9 s"
         "n0 n0 nd s";
         flex-wrap: wrap;
         gap: 6px;
-        background: var(--button-border-color);
+        background: var( --button-bg-color);
         grid-auto-rows: 48px;
         padding: 6px;
 
@@ -47,9 +47,9 @@
             border: none;
             background: var(--buttons-bg);
             border-radius: 8px;
-           
-            
-        
+
+
+
             &:nth-child(1) {grid-area: n1;}
             &:nth-child(2) {grid-area: n2;}
             &:nth-child(3) {grid-area: n3;}
@@ -73,8 +73,8 @@
                 background: var(--buttons-get);
                 color: var(--buttons-get-text);
             }
-          
-           
+
+
         }
     }
 }

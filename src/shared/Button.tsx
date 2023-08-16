@@ -63,7 +63,7 @@ export const SkipFeatures = defineComponent({
     };
     return () => (
       <span onClick={onClick}>
-        <RouterLink class={s.fake} to={"/items"}>
+        <RouterLink class={s.fake} to={"/start"}>
           跳过
         </RouterLink>
       </span>

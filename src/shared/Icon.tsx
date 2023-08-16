@@ -16,7 +16,7 @@ export type IconName =
   | "notes"
   | "date"
   | "bk"
-  | "pig";
+  | "pig"| "home"| "user"| "statistics";
 
 export const Icon = defineComponent({
   props: {

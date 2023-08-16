@@ -11,7 +11,7 @@ export const TagCreate = defineComponent({
   },
   setup: (props, context) => {
     return () => (
-      <MainLayout>
+      <MainLayout disabled={false}>
         {{
           title: () => "新建标签",
           icon: () => <BackIcon />,

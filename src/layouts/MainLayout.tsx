@@ -1,19 +1,28 @@
-import { defineComponent, PropType } from "vue";
-import { Navbar } from "../shared/Navbar";
-import s from "./MainLayout.module.scss";
+import {defineComponent, PropType} from 'vue';
+import {Navbar} from '../shared/Navbar';
+import s from './MainLayout.module.scss';
+import {Buttombar} from '../shared/Buttombar';
 
 export const MainLayout = defineComponent({
-  setup: (props, context) => {
-    return () => (
-      <div class={s.wrapper}>
-        <Navbar class={s.navbar}>
-          {{
-            default: () => context.slots.title?.(),
-            icon: () => context.slots.icon?.(),
-          }}
-        </Navbar>
-        {context.slots.default?.()}
-      </div>
-    );
-  },
+    props: {
+        disabled: {
+            type: Boolean,
+            default: true,
+          }
+    },
+    setup: (props, context) => {
+        return () => (
+            <div class={s.wrapper}>
+                <Navbar class={s.navbar}>
+                    {{
+                        default: () => context.slots.title?.(),
+                        icon: () => context.slots.icon?.(),
+                    }}
+                </Navbar>
+                {context.slots.default?.()}
+                {props.disabled && <Buttombar/>}
+
+            </div>
+        );
+    },
 });
