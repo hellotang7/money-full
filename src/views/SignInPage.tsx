@@ -81,7 +81,7 @@ export const SignInPage = defineComponent({
       refValidationCode.value.startCount();
     };
     return () => (
-      <MainLayout>
+      <MainLayout disabled={false}>
         {{
           title: () => "登录",
           icon: () => <BackIcon />,

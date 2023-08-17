@@ -1,16 +1,14 @@
 
 .pig_wrapper{
-  margin-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   .pig{
-    width: 100vw;
-    height: 100vw;
+    width: 100%;
+    height: 50vh;
   }
   .text{
-    //margin-top: 40px;
     text-align: center;
     font-size: 22px;
     font-weight: bold;

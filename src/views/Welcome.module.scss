@@ -1,4 +1,6 @@
 .wrapper {
+    border: 1px solid red;
+
     height: calc(100vh - var(--welcome-nav-height));
     display: flex;
     flex-direction: column;
@@ -6,6 +8,8 @@
     margin-bottom: var(--welcome-nav-height);
 
     > main {
+        border: 1px solid red;
+
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -13,7 +17,7 @@
         margin: 16px 16px var(--welcome-nav-gap);
     }
     > footer {
-        flex-shrink: 0;
+        //flex-shrink: 0;
 
     }
 }

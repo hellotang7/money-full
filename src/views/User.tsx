@@ -1,9 +1,8 @@
-import {defineComponent, onMounted, PropType, ref} from 'vue';
+import {defineComponent, onMounted, ref} from 'vue';
 import s from './User.module.scss';
 import {MainLayout} from '../layouts/MainLayout';
-import {BackIcon} from '../shared/BackIcon';
 import {useMeStore} from '../stores/useMeStore';
-import {RouterLink, useRoute, useRouter} from 'vue-router';
+import { useRoute, useRouter} from 'vue-router';
 import {Dialog} from 'vant';
 import {Button} from '../shared/Button';
 import {Icon} from '../shared/Icon';

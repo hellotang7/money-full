@@ -6,10 +6,10 @@ const onClick = () => {
 };
 export const FourActions = () => (
   <div class={s.actions}>
-    <span onClick={onClick}  class={s.button}>
-      <RouterLink to="/start">完成</RouterLink>
-    </span>
-      <SkipFeatures class={s.fake}/>
+
+
+      <RouterLink to="/start" class={s.button}>下一页</RouterLink>
+      <SkipFeatures />
 
   </div>
 );
