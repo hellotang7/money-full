@@ -61,7 +61,7 @@ export const SignInPage = defineComponent({
         localStorage.setItem("jwt", response.data.jwt);
 
         meStore.refreshMe();
-        router.push( "/");
+        router.push( "/items");
       }
     };
 
