@@ -5,8 +5,7 @@ import { SkipFeatures } from "../../shared/Button";
 export const ThreeActions: FunctionalComponent = () => {
   return (
     <div class={s.actions}>
-      <SkipFeatures class={s.fake} />
-      <RouterLink to="/welcome/4">下一页</RouterLink>
+      <RouterLink to="/welcome/4" class={s.button}>下一页</RouterLink>
       <SkipFeatures />
     </div>
   );

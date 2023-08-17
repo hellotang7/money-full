@@ -23,14 +23,13 @@
     .sign {
         width: 12vw;
         height: 12vw;
-        background: var(--tag-bg);
-        border: 1px solid var(--tag-bg);
+        background: var(--tags-bg);
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         .createTag {
-                fill: var(--main);
+                fill: var(--text);
             }
     }
 
@@ -41,7 +40,8 @@
 
     &.selected {
         .sign {
-            border-color: var(--main);
+            box-shadow: var(--tags-show);
+            background: var(--tags-selet-bg);
         }
     }
 }}

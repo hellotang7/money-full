@@ -3,7 +3,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px solid var(--button-border-color);
+        box-shadow: var(--inputPad-show);
         padding: 16px;
         background: var(--buttons-bg);
 
@@ -44,6 +44,7 @@
         padding: 6px;
 
         >button {
+            box-shadow: var(--inputPad-button-show);
             border: none;
             background: var(--buttons-bg);
             border-radius: 8px;

@@ -10,8 +10,9 @@ export const One: FunctionalComponent = () => {
       <h2>
         会挣钱
         <br />
-        还会省钱
+        还要会省钱
       </h2>
+        <p>收入支出记载功能，助您更"省"一步</p>
     </div>
   );
 };

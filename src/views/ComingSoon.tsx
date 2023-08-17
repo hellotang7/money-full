@@ -14,12 +14,13 @@ export const ComingSoon = defineComponent({
                 {{
 
                     default: () => (
-                        <>
-                            <Center class={s.pig_wrapper}>
-                                <Icon name="pig" class={s.pig}/>
-                            </Center>
-                            <p class={s.text}>敬请期待</p>
-                        </>
+
+                            <div class={s.pig_wrapper}>
+                                <Icon name="construction" class={s.pig}/>
+                                <p class={s.text}>敬请期待</p>
+                            </div>
+
+
                     ),
                 }}
             </MainLayout>

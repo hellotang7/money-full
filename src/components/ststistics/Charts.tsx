@@ -33,7 +33,7 @@ export const Charts = defineComponent({
             }
             const diff = new Date(props.endDate).getTime() - new Date(props.startDate).getTime()
             const n = diff / DAY + 1
-            
+
             console.log(n);
             return Array.from({ length: n }).map((_, i) => {
                 const time = new Time(props.startDate + 'T00:00:00.000+0800').add(i, 'day').getTimestamp()

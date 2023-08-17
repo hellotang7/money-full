@@ -6,11 +6,11 @@ const onClick = () => {
 };
 export const FourActions = () => (
   <div class={s.actions}>
-    <SkipFeatures class={s.fake} />
-    <span onClick={onClick}>
+    <span onClick={onClick}  class={s.button}>
       <RouterLink to="/start">完成</RouterLink>
     </span>
-    <SkipFeatures class={s.fake} />
+      <SkipFeatures class={s.fake}/>
+
   </div>
 );
 

@@ -1,5 +1,9 @@
-.wrapper{
-    padding: 16px;
+.wrapper {
+  padding: 16px;
+  height: calc(100vh - 160px);
+  overflow: auto;
+
+
 }
 
 

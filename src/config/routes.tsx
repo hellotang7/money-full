@@ -54,10 +54,7 @@ export const routes = [
         path: "4",
         name: "Welcome4",
         components: { main: Four, footer: FourActions },
-        beforeEnter: (to:any, from:any) => {
-          localStorage.setItem("skipFeatures", "yes");
 
-        },
       },
     ],
   },

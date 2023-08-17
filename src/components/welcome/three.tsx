@@ -1,14 +1,14 @@
 import s from './welcome.module.scss';
-import chart from '../../assets/icons/chart.svg';
 
 
 export const Three =  () => {
     return (
         <div class={s.card}>
             <svg>
-                <use xlinkHref='#chart'></use>
+                <use xlinkHref='#charts'></use>
             </svg>
-            <h2>每日提醒<br />不遗漏每一笔账单</h2>
+            <h2>数据可视化<br />收支一目了然</h2>
+            <p>数据可视化功能，助您"分"毫必究</p>
         </div>
     )
 }

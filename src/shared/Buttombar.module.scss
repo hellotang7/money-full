@@ -15,8 +15,15 @@
   justify-items: center;
 
   .action {
+    fill: #D5D8DE;
+
+    svg.icon {
+      width: 30px;
+      height: 30px;
+    }
+
     &:nth-child(3) {
-      color: #fff;
+      fill: #fff;
       background: var(--total--expenses--bg);
       width: 8.2vh;
       height: 8.2vh;
@@ -26,9 +33,9 @@
       align-items: center;
     }
 
+
     &.activeClass {
-      color: rgba(254, 166, 65, 1);
-      background: red;
+      fill: rgba(254, 166, 65, 1);
     }
 
   }
@@ -37,8 +44,4 @@
 }
 
 
-svg.icon {
-  width: 30px;
-  height: 30px;
-  color: #D5D8DE;
-}
+

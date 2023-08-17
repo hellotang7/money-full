@@ -18,7 +18,7 @@ export const SignInPage = defineComponent({
     const route = useRoute();
     const formData = reactive({
       email: "2714148252@qq.com",
-      code: "381417",
+      code: "902046",
     });
     const errors = reactive({
       email: [],
@@ -57,19 +57,11 @@ export const SignInPage = defineComponent({
         const response = await http
             .post<{ jwt: string }>('/session', formData, {_autoLoading: true})
           .catch(onError);
-        // const response = await http
-        //   .post<{ jwt: string }>("/session", formData, {
-        //     params: { _mock: "session" },
-        //   })
-        //   .catch(onError);
-
-        // console.log(response);
 
         localStorage.setItem("jwt", response.data.jwt);
 
-        const returnTo = route.query.return_to?.toString();
         meStore.refreshMe();
-        router.push(returnTo || "/");
+        router.push( "/");
       }
     };
 
@@ -96,8 +88,8 @@ export const SignInPage = defineComponent({
           default: () => (
             <div class={s.wrapper}>
               <div class={s.logo}>
-                <Icon class={s.icon} name="mangosteen"></Icon>
-                <h1 class={s.title}>山竹记账</h1>
+                <Icon class={s.icon} name="login"></Icon>
+                <p class={s.title}>欢迎登录</p>
               </div>
               <Form onSubmit={onSubmit}>
                 <FormItem

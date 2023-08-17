@@ -32,7 +32,7 @@ export const TagEdit = defineComponent({
       <MainLayout disabled={false}>
         {{
           title: () => "编辑标签",
-          icon: () => <BackIcon class={s.backIcon}/>,
+          icon: () => <BackIcon />,
           default: () => (
             <>
               <TagForm id={numberId} />

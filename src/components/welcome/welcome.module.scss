@@ -1,35 +1,62 @@
 .card {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    background: var(--welcome-card-bg);
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    > h2 {
-        margin-top: 40px;
-    }
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px;
+  letter-spacing:2px;
+
+ >svg{
+   width: 100vw;
+   height: 100vw;
+   //border: 1px solid red;
+
+}
+  > h2 {
+    //padding-top: 0px;
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  > p {
+    margin-top: 2%;
+    color: var(--welcome-text);
+font-weight: 600;
+
+  }
 }
 
 .actions {
-    position: fixed;
-    z-index: var(--z-index-bottom-nav);
-    background: var(--welcome-bg-end);
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--welcome-nav-height);
+  font-family: var( --welcome-font-family);
+  background: var(--welcome-bg-end);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--welcome-text);
+
+  .button {
+    background: var(--button-bg);
+    border-radius: var(--button-max-radius);
+    color: var(--button-text);
+    font-weight: bold;
+    width: 250px;
+    height: 7vh;
+    text-align: center;
+    line-height: 7vh;
     font-size: 24px;
-    height: var(--welcome-nav-height);
-    padding: 0 16px;
-    color: var(--welcome-text);
-    padding-bottom: var(--welcome-nav-gap);
-    > .fake {
-        visibility: hidden;
-    }
+    letter-spacing:10px;
+
+  }
+
+  .fake {
+    visibility: hidden;
+  }
 }

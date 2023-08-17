@@ -5,8 +5,7 @@ import { SkipFeatures } from "../../shared/Button";
 export const OneActions: FunctionalComponent = () => {
   return (
     <div class={s.actions}>
-      <SkipFeatures class={s.fake} />
-      <RouterLink to="/welcome/2">下一页</RouterLink>
+      <RouterLink class={s.button} to="/welcome/2">下一页</RouterLink>
       <SkipFeatures />
     </div>
   );

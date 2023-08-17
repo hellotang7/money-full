@@ -13,7 +13,7 @@ export const Navbar = defineComponent({
       <div class={s.navbar}>
         <span class={s.icon_wrapper}>{slots.icon?.()}</span>
         <span class={s.title_wrapper}>{slots.default?.()}</span>
-        <span class={s.fake}>{slots.default?.()}</span>
+        <span class={s.fake}></span>
       </div>
     );
   },

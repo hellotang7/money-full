@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 0 20px;
-
+    padding: 30px 16px ;
+background: white;
 }
 
 
@@ -14,11 +14,10 @@
 }
 
 .icon_wrapper{
-    fill:black ;
 
 
-    width: 36px;
-    height: 36px;
+    width: 26px;
+    height: 26px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,6 +30,8 @@
 }
 .fake {
     visibility: hidden;
+    width: 26px;
+    height: 26px;
 }
 
 

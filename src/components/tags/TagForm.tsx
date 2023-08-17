@@ -77,7 +77,7 @@ export const TagForm = defineComponent({
           error={errors["sign"]?.[0] ?? "　"}
         />
         <FormItem>
-          <p class={s.tips}>记账时长按标签即可进行编辑</p>
+          <p class={s.tips}>记账时长按标签进行编辑</p>
         </FormItem>
         <FormItem>
           <Button type="submit" class={s.button}>

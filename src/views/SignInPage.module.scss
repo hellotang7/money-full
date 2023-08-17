@@ -1,22 +1,21 @@
-.warpper{}
+.wrapper{
 
 .logo{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 42px 0 0;
     .icon{
-        width: 64px;
-        height: 64px;
+        width: 100vw;
+        height: 70vw;
     }
     .title{
-        color: var(--app-name-color);
-        font-size: 32px;
+        font-size: 22px;
         font-weight: bold;
     }
 }
 
 .login{
-    padding-top: 96px;
+    padding-top: 30px;
+}
 }
