@@ -84,7 +84,7 @@ export const SignInPage = defineComponent({
       <MainLayout disabled={false}>
         {{
           title: () => "登录",
-          icon: () => <BackIcon />,
+
           default: () => (
             <div class={s.wrapper}>
               <div class={s.logo}>

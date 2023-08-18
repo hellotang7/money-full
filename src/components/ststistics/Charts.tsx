@@ -6,9 +6,6 @@ import {PieChart} from './PieChart';
 import {Bars} from './Bars';
 import {http} from '../../shared/Http';
 import {Time} from '../../shared/time';
-import {Icon} from '../../shared/Icon';
-import {RouterLink} from 'vue-router';
-import {Button} from '../../shared/Button';
 
 const DAY = 24 * 3600 * 1000;
 type Data1Item = { happen_at: string, amount: number }
@@ -45,7 +42,6 @@ export const Charts = defineComponent({
                 return [new Date(time).toISOString(), amount]
             })
         })
-
         //data1
         const fetchData1 = async ()=>{
             const response = await http.get<{ groups: Data1, summary: number }>('/items/summary', {
@@ -56,7 +52,6 @@ export const Charts = defineComponent({
 
             },{ _mock: 'itemSummary',_autoLoading:true});
             data1.value = response.data.groups.reverse();
-
 
         }
         onMounted(fetchData1);
@@ -94,6 +89,7 @@ export const Charts = defineComponent({
                     percent: Math.round((item.amount / total) * 100)
                   }));
         });
+
         return () => (
             <div class={s.wrapper}>
                 <FormItem
@@ -105,18 +101,9 @@ export const Charts = defineComponent({
                     ]}
                     v-model={kind.value}
                 />
-                {data1.value
-                    ?  <><LineChart data={betterData1.value} />
-                    <PieChart data={betterData2.value} />
-                    <Bars data={betterData3.value} /> </>
-                    : <div class={s.msg}>
-                    <Icon name="null" class={s.msg_icon}/>
-                    <p class={s.msg_text}>暂无数据，请试着记一笔~</p>
-                    <RouterLink to="/items/create">
-                        <Button class={s.msg_button}>开始记账</Button>
-                    </RouterLink>
-                </div>}
-
+                <LineChart data={betterData1.value} />
+                <PieChart data={betterData2.value} />
+                <Bars data={betterData3.value} />
             </div>
         )
 
