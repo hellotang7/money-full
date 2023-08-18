@@ -37,22 +37,20 @@
   justify-content: space-around;
   align-items: center;
   color: var(--welcome-text);
-
-  .button {
-    background: var(--button-bg);
-    border-radius: var(--button-max-radius);
-    color: var(--button-text);
-    font-weight: bold;
-    width: 250px;
-    height: 7vh;
-    text-align: center;
-    line-height: 7vh;
-    font-size: 24px;
-    letter-spacing: 10px;
-
-  }
-
+}
   .fake {
     visibility: hidden;
   }
+.button {
+  background: var(--button-bg);
+  border-radius: var(--button-max-radius);
+  color: var(--button-text);
+  font-weight: bold;
+  width: 250px;
+  height: 7vh;
+  text-align: center;
+  line-height: 7vh;
+  font-size: 24px;
+  letter-spacing: 10px;
+
 }

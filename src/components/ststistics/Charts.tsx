@@ -6,6 +6,9 @@ import {PieChart} from './PieChart';
 import {Bars} from './Bars';
 import {http} from '../../shared/Http';
 import {Time} from '../../shared/time';
+import {Icon} from '../../shared/Icon';
+import {RouterLink} from 'vue-router';
+import {Button} from '../../shared/Button';
 
 const DAY = 24 * 3600 * 1000;
 type Data1Item = { happen_at: string, amount: number }
@@ -38,12 +41,11 @@ export const Charts = defineComponent({
                 const time = new Time(props.startDate + 'T00:00:00.000+0800').add(i, 'day').getTimestamp()
 
                 const item = data1.value[0]
-
                 const amount = item && new Date(item.happen_at +'T00:00:00.000+0800').getTime() === time ? data1.value.shift()!.amount : 0
                 return [new Date(time).toISOString(), amount]
             })
         })
-        console.log(betterData1);
+
         //data1
         const fetchData1 = async ()=>{
             const response = await http.get<{ groups: Data1, summary: number }>('/items/summary', {
@@ -54,6 +56,7 @@ export const Charts = defineComponent({
 
             },{ _mock: 'itemSummary',_autoLoading:true});
             data1.value = response.data.groups.reverse();
+
 
         }
         onMounted(fetchData1);
@@ -91,7 +94,6 @@ export const Charts = defineComponent({
                     percent: Math.round((item.amount / total) * 100)
                   }));
         });
-
         return () => (
             <div class={s.wrapper}>
                 <FormItem
@@ -103,9 +105,18 @@ export const Charts = defineComponent({
                     ]}
                     v-model={kind.value}
                 />
-                <LineChart data={betterData1.value} />
-                <PieChart data={betterData2.value} />
-                <Bars data={betterData3.value} />
+                {data1.value
+                    ?  <><LineChart data={betterData1.value} />
+                    <PieChart data={betterData2.value} />
+                    <Bars data={betterData3.value} /> </>
+                    : <div class={s.msg}>
+                    <Icon name="null" class={s.msg_icon}/>
+                    <p class={s.msg_text}>暂无数据，请试着记一笔~</p>
+                    <RouterLink to="/items/create">
+                        <Button class={s.msg_button}>开始记账</Button>
+                    </RouterLink>
+                </div>}
+
             </div>
         )
 

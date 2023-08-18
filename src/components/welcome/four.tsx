@@ -1,5 +1,4 @@
 import s from './welcome.module.scss';
-import cloud from '../../assets/icons/cloud.svg';
 
 
 export const Four =  () =>  (

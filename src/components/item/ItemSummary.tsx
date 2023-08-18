@@ -1,4 +1,4 @@
-import {defineComponent, onMounted, PropType, reactive, ref, watch} from 'vue';
+import {defineComponent, getCurrentInstance, onMounted, onUpdated, PropType, reactive, ref, watch} from 'vue';
 import s from './ItemSummary.module.scss';
 import {Button} from '../../shared/Button';
 import {http} from '../../shared/Http';
@@ -9,7 +9,7 @@ import {Dialog, SwipeCell} from 'vant';
 import {useAfterMe} from '../../hooks/useAfterMe';
 import {useItemStore} from '../../stores/useItemStore';
 import {Icon} from '../../shared/Icon';
-import {RouterLink} from 'vue-router';
+import {RouterLink, useRouter} from 'vue-router';
 
 export const ItemSummary = defineComponent({
     props: {
@@ -59,9 +59,8 @@ export const ItemSummary = defineComponent({
                 }
             );
             Object.assign(itemsBalance, response.data);
+
         };
-
-
         useAfterMe(fetchItemsBalance);
 
         watch(
@@ -76,20 +75,23 @@ export const ItemSummary = defineComponent({
             }
         );
 
-
+        const router = useRouter()
         const timer = ref<number>();
         const currentTag = ref<HTMLDivElement>();
         const onLongPress = (id: number) => {
             Dialog.confirm({
                 message: '删除后无法恢复，是否删除？',
             }).then(async () => {
-                console.log(111);
                 await http.delete(`/items/${id}`, {}, {});
-                // fetchItems()
+                router.go(0)
             });
-
-
         };
+
+
+
+
+
+
 
         const onTouchStart = (e: TouchEvent, item: Item) => {
             currentTag.value = e.currentTarget as HTMLDivElement;
@@ -123,16 +125,16 @@ export const ItemSummary = defineComponent({
                         (<>
                             <ul class={s.total}>
                                 <li>
-                                    <span>收入</span>
-                                    <span>+{itemsBalance.income}</span>
+                                    <span>总入账</span>
+                                    <span>￥<Money value={itemsBalance.income}/></span>
                                 </li>
                                 <li>
-                                    <span>支出</span>
-                                    <span>-{itemsBalance.expenses}</span>
+                                    <span>总支出</span>
+                                    <span>￥<Money value={itemsBalance.expenses}/></span>
                                 </li>
                                 <li>
                                     <span>净收入</span>
-                                    <span>{itemsBalance.balance}</span>
+                                    <span>￥<Money value={itemsBalance.balance}/></span>
                                 </li>
                             </ul>
                             <div class={s.statistics_wrapper}>
@@ -141,7 +143,7 @@ export const ItemSummary = defineComponent({
                                     {itemStore.items.map((item) => (
 
 
-                                        <li onTouchend={onTouchEnd} onTouchmove={onTouchMove}
+                                        <li   onTouchend={onTouchEnd} onTouchmove={onTouchMove}
                                             onTouchstart={(e) => onTouchStart(e, item)}>
 
 

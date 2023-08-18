@@ -25,6 +25,7 @@ export const User = defineComponent({
             }).then(() => {
                 localStorage.removeItem('jwt');
                 router.push('sign_in');
+
             });
 
         };

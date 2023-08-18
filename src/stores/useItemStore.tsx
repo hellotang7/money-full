@@ -7,8 +7,8 @@ type State = {
     page: number
 }
 type Actions = {
-    fetchItems: (startDate?: string, endDate?: string) => void
     _fetch: (firstPage: boolean, startDate?: string, endDate?: string) => void
+    fetchItems: (startDate?: string, endDate?: string) => void
     fetchNextPage: (startDate?: string, endDate?: string) => void
 }
 export const useItemStore = (id: string | string[]) =>
@@ -19,7 +19,6 @@ export const useItemStore = (id: string | string[]) =>
             page: 0
         }),
         actions: {
-
             async _fetch(firstPage, startDate, endDate) {
                 if (!startDate || !endDate) {
                     return
@@ -36,7 +35,7 @@ export const useItemStore = (id: string | string[]) =>
                         _autoLoading: true
                     }
                 )
-                const {resources, pager} = response.data
+                const { resources, pager } = response.data
                 if (firstPage) {
                     this.items = resources
                 } else {
@@ -51,4 +50,5 @@ export const useItemStore = (id: string | string[]) =>
             async fetchItems(startDate, endDate) {
                 this._fetch(true, startDate, endDate)
             }
-        }})()
+        }
+    })()

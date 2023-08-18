@@ -18,6 +18,7 @@ import { SignInPage } from "../views/SignInPage";
 import { StatisticsPage } from "../views/StatisticsPage";
 import {ComingSoon} from '../views/ComingSoon';
 import {User} from '../views/User';
+import {Start} from '../components/welcome/Start';
 
 
 
@@ -79,4 +80,6 @@ export const routes = [
   { path: "/statistics", component: StatisticsPage },
   {path: '/export', component: ComingSoon},
   {path: '/user', component: User},
+  {path: '/start', component: Start},
+
 ];

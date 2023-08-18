@@ -4,6 +4,6 @@ import { TimeTabsLayout } from "../../layouts/TimeTabsLayout";
 
 export const ItemList = defineComponent({
   setup: (props, context) => {
-    return () => <TimeTabsLayout component={ItemSummary} />;
+    return () => <TimeTabsLayout Ptitle={'首页'} component={ItemSummary} />;
   },
 });

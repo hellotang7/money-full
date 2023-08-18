@@ -8,6 +8,7 @@ import { Form, FormItem } from "../shared/Form";
 
 const demo = defineComponent({
   props: {
+
     startDate: {
       type: String as PropType<string>,
       required: false,
@@ -22,6 +23,11 @@ const demo = defineComponent({
 
 export const TimeTabsLayout = defineComponent({
   props: {
+    Ptitle:{
+      type: String,
+      required: true,
+    },
+
     component: {
       type: Object as PropType<typeof demo>,
       required: true,
@@ -37,6 +43,9 @@ export const TimeTabsLayout = defineComponent({
   },
 
   setup: (props, context) => {
+    const title = ref<string>(props.Ptitle)
+
+
     const refSelected = ref("本月");
     const time = new Time();
     const tempTime = reactive({
@@ -77,7 +86,7 @@ export const TimeTabsLayout = defineComponent({
     return () => (
       <MainLayout class={s.wrapper}>
         {{
-          title: () => "山竹记账",
+          title: () =>title.value,
           default: () => (
 
               <>
