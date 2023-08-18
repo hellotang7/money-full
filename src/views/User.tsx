@@ -22,11 +22,18 @@ export const User = defineComponent({
             Dialog.confirm({
                 title: '确认',
                 message: '你真的要退出登录吗'
-            }).then(() => {
-                localStorage.removeItem('jwt');
-                router.push('sign_in');
+            }).then( async () => {
+                await localStorage.removeItem('jwt');
+
+
+                await router.push('/start')
+
+                await window.location.reload()
+
+
 
             });
+
 
         };
         onMounted(async () => {

@@ -29,7 +29,7 @@ export const routes = [
     path: '/welcome',
     component: Welcome,
     beforeEnter: (to:any, from:any, next:any) => {
-      localStorage.getItem('skipFeatures') === 'yes' ? next('/items') : next()
+      localStorage.getItem('skipFeatures') === 'yes' ? next('/start') : next()
     },
 
 

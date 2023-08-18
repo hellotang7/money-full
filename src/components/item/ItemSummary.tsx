@@ -81,8 +81,8 @@ export const ItemSummary = defineComponent({
                 message: '删除后无法恢复，是否删除？',
             }).then(async () => {
                 await http.delete(`/items/${id}`, {}, {});
-                fetchItemsBalance();
-
+                // fetchItemsBalance();
+window.location.reload()
             });
         };
 

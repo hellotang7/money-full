@@ -40,9 +40,7 @@ router.beforeEach((to, from) => {
   }
   return meStore.mePromise!.then(
       () => true,
-      async () => {
+      async () => '/sign_in?return_to=' + from.path
 
-        return '/sign_in?return_to=' + from.path;
-      }
   );
 })

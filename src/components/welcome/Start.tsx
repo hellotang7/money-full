@@ -3,6 +3,7 @@ import {RouterLink} from 'vue-router';
 import {SkipFeatures} from '../../shared/Button';
 
 const onClick = () => {
+
     localStorage.setItem("skipFeatures", "yes");
 };
 export const Start =  () =>  (
