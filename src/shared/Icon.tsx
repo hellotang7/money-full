@@ -23,7 +23,7 @@ export type IconName =
     | 'construction'
     | 'record'
     | 'login'
-    | 'null';
+    | 'null'| 'enter';
 
 export const Icon = defineComponent({
     props: {

@@ -82,7 +82,7 @@ function isDev(){
   if (
       location.hostname !== "localhost" &&
       location.hostname !== "127.0.0.1" &&
-      location.hostname !== "192.168.3.57") {return false;}
+      location.hostname !== "192.168.0.107") {return false;}
   return true
 }
 export const http = new Http(isDev() ?  'api/v1' : 'http://121.196.236.94:3000/api/v1');

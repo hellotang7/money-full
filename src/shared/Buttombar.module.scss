@@ -1,7 +1,7 @@
 
 .action_list {
-
-  width: 97%;
+  margin: 0 2%;
+  width: 96%;
   background-color: #fff;
   z-index: 10;
   position: fixed;
@@ -13,7 +13,6 @@
   align-items: center;
   grid-template-columns: auto auto auto auto auto;
   justify-items: center;
-
   .action {
     fill: #D5D8DE;
 
