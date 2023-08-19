@@ -73,7 +73,7 @@ export const ItemSummary = defineComponent({
             }
         );
 
-        const router = useRouter()
+        const router = useRouter();
         const timer = ref<number>();
         const currentTag = ref<HTMLDivElement>();
         const onLongPress = (id: number) => {
@@ -81,15 +81,9 @@ export const ItemSummary = defineComponent({
                 message: '删除后无法恢复，是否删除？',
             }).then(async () => {
                 await http.delete(`/items/${id}`, {}, {});
-                // fetchItemsBalance();
-window.location.reload()
+                await window.location.reload();
             });
         };
-
-
-
-
-
 
 
         const onTouchStart = (e: TouchEvent, item: Item) => {
@@ -122,74 +116,75 @@ window.location.reload()
                 :
                 <div class={s.wrapper}>
                     {
-                    (itemStore.items && itemStore.items.length > 0)
-                        ?
-                        (<>
-                            <ul class={s.total}>
-                                <li>
-                                    <span>总入账</span>
-                                    <span>￥<Money value={itemsBalance.income}/></span>
-                                </li>
-                                <li>
-                                    <span>总支出</span>
-                                    <span>￥<Money value={itemsBalance.expenses}/></span>
-                                </li>
-                                <li>
-                                    <span>净收入</span>
-                                    <span>￥<Money value={itemsBalance.balance}/></span>
-                                </li>
-                            </ul>
-                            <div class={s.statistics_wrapper}>
-                                <div class={s.statistics}></div>
-                                <ol class={s.list}>
-                                    {itemStore.items.map((item) => (
+                        (itemStore.items && itemStore.items.length > 0)
+                            ?
+                            (<>
+                                <ul class={s.total}>
+                                    <li>
+                                        <span>总入账</span>
+                                        <span>￥<Money value={itemsBalance.income}/></span>
+                                    </li>
+                                    <li>
+                                        <span>总支出</span>
+                                        <span>￥<Money value={itemsBalance.expenses}/></span>
+                                    </li>
+                                    <li>
+                                        <span>净收入</span>
+                                        <span>￥<Money value={itemsBalance.balance}/></span>
+                                    </li>
+                                </ul>
+                                <div class={s.statistics_wrapper}>
+                                    <div class={s.statistics}></div>
+                                    <ol class={s.list}>
+                                        {itemStore.items.map((item) => (
 
 
-                                        <li   onTouchend={onTouchEnd} onTouchmove={onTouchMove}
-                                            onTouchstart={(e) => onTouchStart(e, item)}>
+                                            <li onTouchend={onTouchEnd} onTouchmove={onTouchMove}
+                                                onTouchstart={(e) => onTouchStart(e, item)}>
 
 
-                                            <div class={s.sign}>
-                                                <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
-                                            </div>
-                                            <div class={s.text}>
-                                                <div class={s.tagAndAmount}>
+                                                <div class={s.sign}>
+                                                    <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
+                                                </div>
+                                                <div class={s.text}>
+                                                    <div class={s.tagAndAmount}>
                                         <span
                                             class={s.tag}>{item.tags && item.tags.length > 0 ? item.tags[0].name : '未分类'}</span>
-                                                    {item.kind === 'expenses'
-                                                        ? <span class={s.amountExpenses}>- <Money value={item.amount}/></span>
-                                                        :
-                                                        <span class={s.amountIncome}>+ <Money
-                                                            value={item.amount}/></span>}
+                                                        {item.kind === 'expenses'
+                                                            ? <span class={s.amountExpenses}>- <Money
+                                                                value={item.amount}/></span>
+                                                            :
+                                                            <span class={s.amountIncome}>+ <Money
+                                                                value={item.amount}/></span>}
 
+                                                    </div>
+                                                    <div class={s.time}><Datetime value={item.happen_at}/></div>
                                                 </div>
-                                                <div class={s.time}><Datetime value={item.happen_at}/></div>
-                                            </div>
-                                        </li>
-                                    ))}
-                                    <div class={s.more}>
-                                        {itemStore.hasMore
-                                            ? <Button
-                                                onClick={() => itemStore.fetchNextPage(props.startDate, props.endDate)}>加载更多</Button>
-                                            : <span>没有更多了</span>}
-                                    </div>
-                                </ol>
+                                            </li>
+                                        ))}
+                                        <div class={s.more}>
+                                            {itemStore.hasMore
+                                                ? <Button
+                                                    onClick={() => itemStore.fetchNextPage(props.startDate, props.endDate)}>加载更多</Button>
+                                                : <span>没有更多了</span>}
+                                        </div>
+                                    </ol>
+                                </div>
+
+
+                            </>)
+                            :
+                            <div class={s.msg}>
+                                <Icon name="null" class={s.msg_icon}/>
+                                <p class={s.msg_text}>暂无数据，请试着记一笔~</p>
+                                <RouterLink to="/items/create">
+                                    <Button class={s.msg_button}>开始记账</Button>
+                                </RouterLink>
                             </div>
 
+                    }
 
-                        </>)
-                        :
-                        <div class={s.msg}>
-                            <Icon name="null" class={s.msg_icon}/>
-                            <p class={s.msg_text}>暂无数据，请试着记一笔~</p>
-                            <RouterLink to="/items/create">
-                                <Button  class={s.msg_button}>开始记账</Button>
-                            </RouterLink>
-                        </div>
-
-                }
-
-            </div>
+                </div>
         );
     },
 });

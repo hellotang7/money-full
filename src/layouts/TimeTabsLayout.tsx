@@ -1,10 +1,11 @@
-import { defineComponent, PropType, reactive, ref } from "vue";
+import {defineComponent, onUpdated, PropType, reactive, ref} from 'vue';
 import s from "./TimeTabsLayout.module.scss";
 import { Time } from "../shared/time";
 import { MainLayout } from "./MainLayout";
 import { Tab, Tabs } from "../shared/Tabs";
 import { Overlay } from "vant";
 import { Form, FormItem } from "../shared/Form";
+import {log} from 'echarts/types/src/util/log';
 
 const demo = defineComponent({
   props: {
@@ -71,7 +72,6 @@ export const TimeTabsLayout = defineComponent({
         end: time.lastDayOfYear().format(),
       },
     ];
-
     const refOverlayVisible = ref(false);
     const onsubmitCustomTime = (e: Event) => {
       e.preventDefault();
@@ -98,6 +98,8 @@ export const TimeTabsLayout = defineComponent({
                         onUpdate:selected={onSelect}
                         rerenderOnSelect={props.rerenderOnSwitchTab}
                     >
+
+
                       <Tab value="本月" name="本月">
                         <props.component
                             startDate={timeList[0].start}

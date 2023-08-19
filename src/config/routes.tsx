@@ -1,5 +1,3 @@
-import { RouteRecordRaw } from "vue-router";
-import { Welcome } from "../views/Welcome";
 import { One } from "../components/welcome/One";
 import { Two } from "../components/welcome/Two";
 import { Three } from "../components/welcome/Three";
@@ -8,17 +6,11 @@ import { FourActions } from "../components/welcome/FourActions";
 import { OneActions } from "../components/welcome/OneActions";
 import { ThreeActions } from "../components/welcome/ThreeActions";
 import { TwoActions } from "../components/welcome/TwoActions";
-import { ItemPage } from "../views/ItemPage";
 import { ItemList } from "../components/item/ItemList";
 import { ItemCreate } from "../components/item/ItemCreate";
-import { TagPage } from "../components/tags/TagPage";
 import { TagCreate } from "../components/tags/TagCreate";
 import { TagEdit } from "../components/tags/TagEdit";
-import { SignInPage } from "../views/SignInPage";
-import { StatisticsPage } from "../views/StatisticsPage";
 import {ComingSoon} from '../views/ComingSoon';
-import {User} from '../views/User';
-import {Start} from '../components/welcome/Start';
 
 
 
@@ -27,7 +19,7 @@ export const routes = [
 
   {
     path: '/welcome',
-    component: Welcome,
+    component: ()=>import('../views/Welcome'),
     beforeEnter: (to:any, from:any, next:any) => {
       localStorage.getItem('skipFeatures') === 'yes' ? next('/start') : next()
     },
@@ -61,7 +53,7 @@ export const routes = [
 
   {
     path: "/items",
-    component: ItemPage,
+    component: ()=>import('../views/ItemPage'),
 
     children: [
       { path: "", component: ItemList },
@@ -70,16 +62,16 @@ export const routes = [
   },
   {
     path: "/tags",
-    component: TagPage,
+    component: ()=>import('../components/tags/TagPage'),
     children: [
       { path: "create", component: TagCreate },
       { path: ":id/edit", component: TagEdit },
     ],
   },
-  { path: "/sign_in", component: SignInPage },
-  { path: "/statistics", component: StatisticsPage },
-  {path: '/export', component: ComingSoon},
-  {path: '/user', component: User},
-  {path: '/start', component: Start},
+  { path: "/sign_in", component: ()=>import('../views/SignInPage') },
+  { path: "/statistics", component: ()=>import('../views/StatisticsPage') },
+  {path: '/export', component: ()=>import('../views/ComingSoon')},
+  {path: '/user', component: ()=>import('../views/User')},
+  {path: '/start', component: ()=>import('../components/welcome/Start')},
 
 ];

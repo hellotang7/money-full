@@ -66,3 +66,4 @@ export const User = defineComponent({
         );
     }
 });
+export default User

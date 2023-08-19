@@ -26,3 +26,4 @@ export const Start =  () =>  (
     </>
 )
 Start.displayName = 'Start'
+export default Start

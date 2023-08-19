@@ -13,11 +13,16 @@ export class Time {
     // 目前支持的格式有 YYYY MM DD HH mm ss SSS
     const year = this.date.getFullYear();
     const month = this.date.getMonth() + 1;
+
     const day = this.date.getDate();
+
     const hour = this.date.getHours();
     const minute = this.date.getMinutes();
     const second = this.date.getSeconds();
     const msecond = this.date.getMilliseconds();
+
+
+
     return pattern
       .replace(/YYYY/g, year.toString())
       .replace(/MM/, month.toString().padStart(2, "0"))
@@ -27,11 +32,30 @@ export class Time {
       .replace(/ss/, second.toString().padStart(2, "0"))
       .replace(/SSS/, msecond.toString().padStart(3, "0"));
   }
+
+
+    x(){
+        const today = new Date();
+        const dayOfWeek = today.getDay();
+        const monday = new Date(today.setDate(today.getDate() - dayOfWeek ));
+        return monday
+    }
+    y(){
+        const today = new Date();
+        const dayOfWeek = today.getDay();
+        const sunday = new Date(today.setDate(today.getDate() - dayOfWeek + 7));
+        return sunday
+    }
+
+
+
+
  firstDayOfMonth() {
     return new Time(
       new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0)
     );
   }
+
   firstDayOfYear() {
     return new Time(new Date(this.date.getFullYear(), 0, 1, 0, 0, 0));
   }

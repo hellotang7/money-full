@@ -15,3 +15,4 @@ export const TagPage = defineComponent({
     );
   },
 });
+export default TagPage

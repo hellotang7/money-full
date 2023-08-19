@@ -5,7 +5,33 @@ import styleImport, { VantResolve } from "vite-plugin-style-import";
 
 import { svgstore } from "./src/vite_plugins/svgstore";
 
-export default defineConfig({
+export default defineConfig(({command})=>{
+  return{
+    define: command === 'build' ? {
+      DEBUG: false
+    } : {
+      DEBUG: true
+    },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: any) {
+          if (id.includes('echarts')) {
+            return 'echarts';
+          }
+          if (id.includes('mock') || id.includes('faker')) {
+            return 'mock';
+          }
+          if (id.includes('vant')) {
+            return 'vant';
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        }
+      }
+    }
+  },
   plugins: [
     vue(),
     vueJsx({
@@ -24,4 +50,4 @@ export default defineConfig({
       },
     },
   },
-});
+}});

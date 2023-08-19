@@ -6,3 +6,4 @@ export const StatisticsPage = defineComponent({
     return () => <TimeTabsLayout Ptitle={'统计页面'}   rerenderOnSwitchTab={true} hideThisYear={true} component={Charts}/>;
   },
 });
+export default StatisticsPage
