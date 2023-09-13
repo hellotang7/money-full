@@ -7,7 +7,12 @@ bin/coscli-windows cp -r dist cos://mangosteen-1312726520
 ```
 
 ## 如何开发
+```
+pnpm run dev
+```
 
 
 ## 如何打包
-
+```
+pnpm run build 
+```
